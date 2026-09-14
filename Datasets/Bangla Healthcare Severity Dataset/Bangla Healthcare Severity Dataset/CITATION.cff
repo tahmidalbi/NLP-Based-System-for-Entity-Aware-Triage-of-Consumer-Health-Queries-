@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+
+title: Bangla Healthcare Severity Dataset
+
+message: "If you use this dataset, please cite it as follows."
+
+type: dataset
+
+authors:
+  - family-names: Deb Roy
+    given-names: Pulock
+    email: pulockdebroy02@gmail.com
+    orcid: https://orcid.org/0009-0007-4716-6365
+
+  - family-names: Begum
+    given-names: Mst. Chameli
+    email: chamelibegum7037@gmail.com
+    orcid: https://orcid.org/0009-0002-1817-4941
+
+  - family-names: Husain Sagor
+    given-names: Dolour
+    email: Dolourhusiansagor@gmail.com
+    orcid: https://orcid.org/0009-0000-6839-7241
+
+  - family-names: Hossain
+    given-names: Badar
+    email: badar12041@gmail.com
+    orcid: https://orcid.org/0009-0004-5545-2714
+
+version: "1.0"
+
+date-released: "2026-06-30"
+
+license: CC-BY-4.0
+
+repository-code: https://github.com/pulockdebroy0
+
+url: https://www.pulockdebroy.com
