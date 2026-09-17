@@ -1,0 +1,78 @@
+BanglaCare - Pretrained Bengali FastText (cc.bn.300.bin) verification
+======================================================================
+
+File: embeddings/cc.bn.300.bin (5.6 GB)
+Source: https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.bn.300.bin.gz
+Binary magic number verified: 793712314 (genuine fastText format, not corrupted)
+Load time: 50.3s
+
+Verified training args (read back from the binary itself):
+  dim = 300
+  ws = 5
+  minn = 5, maxn = 5
+  model = cbow
+  bucket = 2,000,000
+Vocabulary size: 1,485,023 words
+
+NOTE: this is the general-purpose model exactly as released by Facebook AI
+Research (not trained by us) - it is used only as a fixed feature generator,
+concatenated with the custom Medical FastText (Phase 5) in Phase 7. Its CBOW
+training and minn=maxn=5 setting differ from our custom Medical FastText
+(skip-gram, minn=3/maxn=6, guide 7.1), which is expected and does not need to
+match: the guide only fixes hyperparameters for the model we train ourselves.
+
+## Qualitative nearest-neighbor check (general, non-medical vocabulary)
+
+'পানি' (water)
+   0.702  পানির
+   0.662  পানিের
+   0.661  পানিও
+   0.651  পানিঃ
+   0.641  পানিটা
+
+'স্কুল' (school)
+   0.711  স্কুলের
+   0.702  স্কুলএ
+   0.699  কলেজ        <- semantically related (college), not just morphology
+   0.683  স্কুল'র
+   0.682  স্কুলআল
+
+'রোগ' (disease)
+   0.702  রোগের
+   0.642  ব্যাধিও      <- synonym (ailment)
+   0.629  অসুখবিসুখ    <- synonym (sickness)
+   0.626  রোগেরও
+   0.623  ব্যাধী        <- synonym (ailment)
+
+'মা' (mother)
+   0.576  বাবা          <- father (family relation)
+   0.563  গোং
+   0.540  মা'ই
+   0.536  ফুপু          <- paternal aunt (family relation)
+   0.525  বড়বোন        <- elder sister (family relation)
+
+These results show real semantic structure (synonym and relation clustering),
+not just surface morphology - consistent with a genuinely trained embedding.
+
+## Out-of-vocabulary subword construction test
+
+Per guide 7/9: "FastText can construct vectors for unseen spellings from
+subwords, so an unseen medical/Banglish token does not have to collapse to a
+single generic UNK vector." Verified on three strings absent from the
+1.48M-word vocabulary:
+
+  'jorer'      in_vocab=False  vector_shape=(300,)  vector_norm=0.341
+  'gastricer'  in_vocab=False  vector_shape=(300,)  vector_norm=0.259
+  'napa500mg'  in_vocab=False  vector_shape=(300,)  vector_norm=0.115
+
+All three produced valid, non-zero 300D vectors via subword hashing rather
+than failing or returning a null/zero vector - confirms OOV handling works
+as required before this model is used in Phase 7's token representation
+pipeline.
+
+## Conclusion
+
+embeddings/cc.bn.300.bin is verified genuine, correctly dimensioned (300D),
+semantically coherent, and capable of constructing OOV vectors for unseen
+Banglish/medical spellings. Ready for use as the fixed "General FastText"
+input in Phase 7 (600D = 300D general + 300D medical).

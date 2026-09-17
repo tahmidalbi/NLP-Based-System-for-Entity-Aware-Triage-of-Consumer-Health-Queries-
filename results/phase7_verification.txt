@@ -1,0 +1,47 @@
+BanglaCare - Phase 7 + Section 10 verification
+============================================================
+
+Featurizer dim: 600 (expect 600)
+
+## NER batch (from data/processed/healthner/train.json)
+  batch size: 6
+  features shape: (6, 108, 600)  (expect (B, T, 600))
+  mask shape: (6, 108)
+  ner_tags shape: (6, 108)
+  lengths: [108, 29, 32, 24, 34, 68]
+  sample tokens[0][:6]: ['গ্রাহক', ',', 'ডাক্তার', 'ভাইকে', 'প্রশ্ন', 'করার']
+
+## Severity batch (from data/processed/severity_train.csv)
+  batch size: 6
+  features shape: (6, 14, 600)  (expect (B, T, 600))
+  mask shape: (6, 14)
+  severity_ids: [0, 3, 2, 2, 0, 3] -> ['Emergency', 'General Query', 'Routine', 'Routine', 'Emergency', 'General Query']
+
+## Model parameter counts
+  total: 2,088,210
+  encoder (projection+BiLSTM): 1,733,376
+  ner_head (emission+CRF): 6,030
+  severity_head: 348,804
+
+## NER forward pass
+  encoder output h shape: (6, 108, 384)  (expect (B, T, 384))
+  NER emissions shape: (6, 108, 15)  (expect (B, T, 15))
+  CRF NLL loss: 133.1783 (finite: True)
+  CRF decode: 6 sequences, all label ids valid: True, decoded lengths match input lengths: True
+  decoded[0] -> labels: ['I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'I-Dosage', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Symptom', 'I-Symptom', 'B-Symptom', 'I-Symptom', 'B-Symptom', 'I-Symptom', 'B-Symptom', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'I-Symptom', 'B-Symptom', 'I-Symptom', 'B-Symptom', 'I-Symptom', 'B-Symptom', 'I-Symptom', 'B-Symptom', 'I-Symptom', 'B-Symptom', 'I-Symptom', 'B-Symptom', 'I-Symptom', 'B-Health Condition', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Medical Procedure', 'B-Health Condition', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Medical Procedure', 'B-Health Condition', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Symptom', 'I-Symptom', 'B-Symptom', 'I-Health Condition', 'B-Health Condition', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O', 'B-Symptom', 'I-Symptom', 'B-Symptom', 'I-Symptom', 'B-Dosage', 'B-Health Condition', 'I-Medicine', 'O', 'B-Symptom', 'I-Symptom', 'B-Symptom', 'O', 'B-Medical Procedure', 'B-Health Condition', 'B-Medical Procedure', 'B-Health Condition', 'I-Medicine', 'O', 'B-Medical Procedure', 'I-Medicine', 'O']
+
+## Severity forward pass
+  encoder output h shape: (6, 14, 384)  (expect (B, T, 384))
+  severity logits shape: (6, 4)  (expect (B, 4))
+  cross-entropy loss: 1.3934 (finite: True)
+
+## Gradient protection rule check (guide 10.4: 'Protect the NER head')
+  after severity-only backward:
+    NER emission layer grad is None/zero (should be True): True
+    shared encoder projection grad is nonzero (should be True): True
+    severity head grad is nonzero (should be True): True
+  after NER-only backward:
+    severity head grad is None/zero (should be True, unused in this forward): True
+    NER emission layer grad is nonzero (should be True): True
+
+## ALL CHECKS PASSED: True
