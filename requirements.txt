@@ -1,0 +1,28 @@
+# BanglaCare - Python dependencies for the pipeline built so far (Phases 1-7).
+#
+# Install with:
+#   pip install -r requirements.txt
+#
+# Notes:
+# - torch is pulled from PyTorch's CUDA 12.1 wheel index (line below) so it
+#   installs with GPU support where a CUDA 12.x-compatible driver is present;
+#   pip falls back to the plain PyPI index for every other package.
+# - The official `fasttext` PyPI package fails to build on Windows against
+#   modern pybind11/MSVC (pybind11 API changes broke its 0.9.3-era C++
+#   bindings). `fasttext-wheel` is a maintained fork of the same underlying
+#   C++ library with prebuilt wheels and an identical `fasttext` import name/
+#   API - use it instead, not both.
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+# Phase 1 (data audit), Phase 2 (splitting), Phase 3 (preprocessing), Phase 4 (corpus)
+pandas==3.0.5
+numpy==2.4.6
+openpyxl==3.1.5          # required by pandas.read_excel() for the Severity dataset .xlsx
+datasets==5.0.1          # Hugging Face Datasets, for loading BanglaHealth
+
+# Phase 5 (custom Medical FastText) / Phase 6 (pretrained Bengali FastText)
+fasttext-wheel==0.9.2    # provides the `fasttext` module; do NOT also install `fasttext`
+
+# Phase 7 (data pipeline) / Section 10 (model architecture)
+torch==2.5.1+cu121
+pytorch-crf==0.7.2       # provides the `torchcrf` module (linear-chain CRF for the NER head)
