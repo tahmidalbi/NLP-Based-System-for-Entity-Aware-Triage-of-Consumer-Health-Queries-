@@ -33,6 +33,25 @@ def normalize_text(text, lowercase_latin=True):
     return t
 
 
+def clean_token(token, lowercase_latin=True):
+    """Per-token cleaning for label-aligned data (HealthNER): NFC + strip
+    zero-width/BOM + (project convention) lowercase Latin. Never collapses
+    whitespace (a token has none) and never returns an empty string for a
+    non-empty input, so token count - and therefore label alignment - is
+    always preserved. If cleaning would empty the token, the original token
+    is kept unchanged and the caller should log this case.
+    """
+    if token is None or token == "":
+        return token, False
+    t = unicodedata.normalize("NFC", str(token))
+    t = ZERO_WIDTH_RE.sub("", t)
+    if lowercase_latin:
+        t = "".join(c.lower() if c.isascii() else c for c in t)
+    if t == "":
+        return token, True  # fallback: preserve original, flag as logged case
+    return t, False
+
+
 def char_shingles(text, n=5):
     """Character n-gram shingle set used for near-duplicate Jaccard similarity."""
     if len(text) < n:

@@ -1,0 +1,236 @@
+BanglaCare - Medical FastText nearest-neighbor audit
+============================================================
+
+Vocabulary size: 68804
+Training time: 949.2s on corpus of 298447 lines
+
+NOTE: not every neighbor will be medically perfect - FastText learns
+usage similarity from the corpus, not an ontology (guide 7.3).
+
+## Symptom
+  'জ্বর' (in learned vocab: True)
+      0.783  জ্বরজ্বর
+      0.752  জ্বর'
+      0.752  জ্বর’
+      0.691  জ্বরশরীর
+      0.687  জ্বরটা
+      0.685  জ্বরটি
+      0.684  জ্ব্রর
+      0.655  জ্বরের
+      0.654  ১০৪°
+      0.645  ১০২°ফা
+
+  'কাশি' (in learned vocab: True)
+      0.725  কাশি।
+      0.719  কাশিটি
+      0.719  কাশিও
+      0.714  কাশিটা
+      0.714  সর্দি
+      0.680  কাশলে
+      0.667  কাশির
+      0.666  কফকাশি
+      0.661  কফ
+      0.654  সর্দিটা
+
+  'ব্যথা' (in learned vocab: True)
+      0.798  ব্যথা-
+      0.783  ব্যথাচাপ
+      0.781  ব্যথা?
+      0.770  ব্যথা:
+      0.761  ব্যথাই
+      0.757  ব্যথ
+      0.694  ব্যথাটি
+      0.680  ব্যথাচোখে
+      0.678  ব্যথাও
+      0.674  ব্যথাটা
+
+  'jor' (in learned vocab: True)
+      0.794  jorer
+      0.788  jore
+      0.776  joruri
+      0.775  jorayu
+      0.760  dupor
+      0.754  zor
+      0.754  asci
+      0.753  thandda
+      0.743  jomse
+      0.741  asca
+
+
+## Medicine
+  'নাপা' (in learned vocab: True)
+      0.781  নাপাই
+      0.778  এক্সটেন্ড
+      0.731  নাপাডল
+      0.721  নাপায়
+      0.711  এক্সটেন
+      0.697  ০১মিঃলিঃ
+      0.674  নাপার
+      0.674  এক্সটেন্ডেড
+      0.655  এক্সটেন্ট
+      0.654  ১০২°ফা
+
+  'প্যারাসিটামল' (in learned vocab: True)
+      0.978  প্যারাসিটামল:
+      0.970  প্যারাসিটামলও
+      0.954  প্যারাসিটামলে
+      0.940  প্যারাসিটামল,
+      0.893  প্যারাসিটামলজাতীয়
+      0.890  প্যারাসিটামলের
+      0.875  পেরাসিটামল
+      0.856  প্যারসিটামল
+      0.845  প্যারাসিটেমল
+      0.822  প্যারাসিটেমলে
+
+  'napa' (in learned vocab: True)
+      0.882  napa1
+      0.831  extend
+      0.811  napadol
+      0.770  extended
+      0.763  extent
+      0.749  napa500
+      0.748  napa500mg
+      0.741  nap
+      0.729  extra
+      0.715  665mg
+
+  'এন্টিবায়োটিক' (in learned vocab: True)
+      0.918  এন্টিবায়োটিকে
+      0.867  এন্টিবায়োটিকের
+      0.849  এন্টিবাযোটিক
+      0.817  অ্যান্টিবায়োটিক
+      0.794  অ্যান্টিবায়োটিকও
+      0.772  অ্যান্টিবায়োটিকজাতীয়
+      0.767  অ্যান্টিবায়োটিকসহ
+      0.767  এন্টিবায়েটিক
+      0.764  অ্যান্টিবায়োটিকে
+      0.761  অ্যান্টিবায়োটিককে
+
+
+## Health Condition
+  'ডায়াবেটিস' (in learned vocab: True)
+      0.908  ডায়াবেটিস২
+      0.904  ‘ডায়াবেটিস
+      0.904  ডায়াবেটিস:
+      0.897  ডায়াবেটিস!
+      0.896  ডায়াবেটিসএসব
+      0.891  ডায়াবেটিস-২
+      0.885  ডায়াবেটিসই
+      0.863  ননডায়াবেটিস
+      0.858  ডায়াবেটিসও
+      0.852  ডায়াবেটিস।
+
+  'diabetes' (in learned vocab: True)
+      0.939  prediabetes
+      0.900  diabeties
+      0.883  diabetis
+      0.858  diabetics
+      0.849  diabetic
+      0.830  diabates
+      0.682  diat
+      0.669  dia
+      0.640  diarrhoea
+      0.639  dialysis
+
+  'pregnancy' (in learned vocab: True)
+      0.872  pregnant
+      0.847  pregnency
+      0.784  pregnent
+      0.718  preiod
+      0.689  pre
+      0.673  pregaba
+      0.650  premum
+      0.637  preferably
+      0.632  infancy
+      0.622  policy
+
+
+## Specialist
+  'gynaecologist' (in learned vocab: True)
+      0.974  gyanaecologist
+      0.942  gyenocologist
+      0.937  gaynacologist
+      0.933  gynecologist
+      0.925  oncologist
+      0.891  psycologist
+      0.881  opthalmologist
+      0.880  pulmonologist
+      0.878  pathologist
+      0.864  nephrologist
+
+  'dermatologist' (in learned vocab: True)
+      0.941  heamatologist
+      0.936  hematologist
+      0.909  rheumatologist
+      0.883  hepatologist
+      0.880  dermatology
+      0.854  gaynacologist
+      0.854  pulmonologist
+      0.846  opthalmologist
+      0.843  gyenocologist
+      0.837  oncologist
+
+  'ডেন্টিস্ট' (in learned vocab: True)
+      0.942  ডেন্টিস্ট।
+      0.899  ডেন্টিস্টকে
+      0.882  ডেন্টিস্টের
+      0.859  ডেন্টিস্টদের
+      0.858  ডেন্টিস্ট্রি
+      0.814  ডেন্টিস্টরা
+      0.747  টেলিডেন্টিস্ট্রি
+      0.739  অর্থোডন্টিস্ট
+      0.734  টেলিডেন্টিস্ট্রির
+      0.681  ডেন্টিন
+
+
+## Medical Procedure
+  'এক্সরে' (in learned vocab: True)
+      0.894  এক্সরের
+      0.840  এক্সরেতে
+      0.725  এক্স-রে
+      0.695  এক্স-রে।
+      0.689  এক্স-রে,
+      0.678  এক্স-রেতে
+      0.589  এক্সে
+      0.577  সিটিস্ক্যান
+      0.572  সিটিস্ক্যানসহ
+      0.570  সিটিস্ক্যানও
+
+  'অপারেশন' (in learned vocab: True)
+      0.870  অপারেশনই
+      0.862  অপারেশনও
+      0.860  অপারেশনস
+      0.836  অপারেশনটি
+      0.830  অপারেশন।
+      0.799  ওপারেশন
+      0.796  অপারেশান
+      0.771  অপারেশনকে
+      0.770  অপারেশানের
+      0.756  অপারেশনেও
+
+  'ecg' (in learned vocab: True)
+      0.696  echo
+      0.670  eco
+      0.583  2habf
+      0.571  angiogram
+      0.570  cxr
+      0.566  electrolyte
+      0.565  ett
+      0.559  skiagram
+      0.558  ultrasonogram
+      0.557  electrolytes
+
+
+## Rare/long medical word
+  'আল্ট্রাসনোগ্রাম' (in learned vocab: True)
+      0.964  আল্ট্রাসনোগ্রামে
+      0.951  আল্ট্রাসনোগ্রামের
+      0.942  আল্ট্রাসনোগ্রাম,
+      0.927  আল্ট্রাসনোগ্রাফি,
+      0.925  আল্ট্রাসনোগ্রাফিতে
+      0.921  আল্ট্রাসনোগ্রাফির
+      0.919  আল্ট্রাসনোগ্রাফি
+      0.915  (আল্ট্রাসনোগ্রাম,
+      0.905  আল্টাসনোগ্রাম
+      0.898  আল্ট্রাসোনোগ্রাম
+
