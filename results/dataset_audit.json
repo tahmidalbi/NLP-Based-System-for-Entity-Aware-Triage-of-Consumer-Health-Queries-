@@ -1,0 +1,415 @@
+{
+  "healthner": {
+    "train": {
+      "rows": 25426,
+      "columns": [
+        "text",
+        "labels"
+      ],
+      "missing_or_empty_text": 0,
+      "token_label_count_mismatches": 0,
+      "token_length_stats": {
+        "median": 31.0,
+        "p90": 64.0,
+        "p95": 82.0,
+        "p99": 112.0,
+        "max": 507,
+        "mean": 36.01632187524581
+      },
+      "script_mix": {
+        "n": 25426,
+        "empty_or_missing": 0,
+        "pct_empty_or_missing": 0.0,
+        "contains_bangla_pct": 77.7,
+        "contains_latin_pct": 44.9,
+        "mixed_script_pct": 22.6,
+        "contains_digit_pct": 46.52,
+        "contains_url_pct": 0.0,
+        "contains_zero_width_or_bom_pct": 1.79
+      },
+      "exact_duplicates_within_split": {
+        "duplicate_groups": 6,
+        "rows_involved_in_duplicates": 12,
+        "pct_rows_duplicated": 0.05
+      },
+      "entity_span_counts_B_tags": {
+        "Symptom": 26560,
+        "Health Condition": 6597,
+        "Medicine": 14229,
+        "Specialist": 5642,
+        "Age": 4436,
+        "Dosage": 6497,
+        "Medical Procedure": 3089
+      },
+      "rows_with_zero_bangla_chars": 5670,
+      "pct_rows_with_zero_bangla_chars": 22.3
+    },
+    "valid": {
+      "rows": 3178,
+      "columns": [
+        "text",
+        "labels"
+      ],
+      "missing_or_empty_text": 0,
+      "token_label_count_mismatches": 0,
+      "token_length_stats": {
+        "median": 30.0,
+        "p90": 65.0,
+        "p95": 83.0,
+        "p99": 113.0,
+        "max": 342,
+        "mean": 36.1979232221523
+      },
+      "script_mix": {
+        "n": 3178,
+        "empty_or_missing": 0,
+        "pct_empty_or_missing": 0.0,
+        "contains_bangla_pct": 76.75,
+        "contains_latin_pct": 44.68,
+        "mixed_script_pct": 21.43,
+        "contains_digit_pct": 46.66,
+        "contains_url_pct": 0.0,
+        "contains_zero_width_or_bom_pct": 1.26
+      },
+      "exact_duplicates_within_split": {
+        "duplicate_groups": 0,
+        "rows_involved_in_duplicates": 0,
+        "pct_rows_duplicated": 0.0
+      },
+      "entity_span_counts_B_tags": {
+        "Medicine": 1781,
+        "Symptom": 3460,
+        "Age": 595,
+        "Dosage": 762,
+        "Medical Procedure": 355,
+        "Health Condition": 788,
+        "Specialist": 695
+      },
+      "rows_with_zero_bangla_chars": 739,
+      "pct_rows_with_zero_bangla_chars": 23.25
+    },
+    "test": {
+      "rows": 3179,
+      "columns": [
+        "text",
+        "labels"
+      ],
+      "missing_or_empty_text": 0,
+      "token_label_count_mismatches": 0,
+      "token_length_stats": {
+        "median": 30.0,
+        "p90": 65.0,
+        "p95": 82.0,
+        "p99": 116.0,
+        "max": 321,
+        "mean": 35.86284995281535
+      },
+      "script_mix": {
+        "n": 3179,
+        "empty_or_missing": 0,
+        "pct_empty_or_missing": 0.0,
+        "contains_bangla_pct": 77.76,
+        "contains_latin_pct": 44.26,
+        "mixed_script_pct": 22.02,
+        "contains_digit_pct": 47.4,
+        "contains_url_pct": 0.0,
+        "contains_zero_width_or_bom_pct": 1.54
+      },
+      "exact_duplicates_within_split": {
+        "duplicate_groups": 0,
+        "rows_involved_in_duplicates": 0,
+        "pct_rows_duplicated": 0.0
+      },
+      "entity_span_counts_B_tags": {
+        "Age": 554,
+        "Symptom": 3528,
+        "Medicine": 1852,
+        "Health Condition": 786,
+        "Dosage": 747,
+        "Specialist": 687,
+        "Medical Procedure": 308
+      },
+      "rows_with_zero_bangla_chars": 707,
+      "pct_rows_with_zero_bangla_chars": 22.24
+    },
+    "cross_split_exact_text_overlap": {
+      "train_valid": 4,
+      "train_test": 3,
+      "valid_test": 0
+    },
+    "label_set": [
+      "B-Age",
+      "B-Dosage",
+      "B-Health Condition",
+      "B-Medical Procedure",
+      "B-Medicine",
+      "B-Specialist",
+      "B-Symptom",
+      "I-Age",
+      "I-Dosage",
+      "I-Health Condition",
+      "I-Medical Procedure",
+      "I-Medicine",
+      "I-Specialist",
+      "I-Symptom",
+      "O"
+    ],
+    "num_labels": 15,
+    "entity_types": [
+      "Age",
+      "Dosage",
+      "Health Condition",
+      "Medical Procedure",
+      "Medicine",
+      "Specialist",
+      "Symptom"
+    ]
+  },
+  "severity": {
+    "rows": 5263,
+    "columns": [
+      "Text",
+      "Categories",
+      "Action Needed"
+    ],
+    "authoritative_source": "Bangla-Healthcare_Dataset.xlsx (CSV export is corrupted, see csv_encoding_issue)",
+    "csv_encoding_issue": {
+      "csv_is_valid_utf8": false,
+      "csv_bangla_text_appears_mojibaked_to_question_marks": true,
+      "recommendation": "Load the Severity dataset from the .xlsx file, not the .csv file."
+    },
+    "missing_or_empty_Text": 0,
+    "missing_Action_Needed": 0,
+    "token_length_stats_Text": {
+      "median": 12.0,
+      "p90": 17.0,
+      "p95": 23.0,
+      "p99": 40.0,
+      "max": 52,
+      "mean": 12.744062321869656
+    },
+    "script_mix_Text": {
+      "n": 5263,
+      "empty_or_missing": 0,
+      "pct_empty_or_missing": 0.0,
+      "contains_bangla_pct": 100.0,
+      "contains_latin_pct": 1.52,
+      "mixed_script_pct": 1.52,
+      "contains_digit_pct": 3.14,
+      "contains_url_pct": 0.0,
+      "contains_zero_width_or_bom_pct": 0.53
+    },
+    "exact_duplicates_Text": {
+      "duplicate_groups": 45,
+      "rows_involved_in_duplicates": 90,
+      "pct_rows_duplicated": 1.71
+    },
+    "class_counts_Categories": {
+      "Urgent": 1461,
+      "Emergency": 1353,
+      "Routine": 1268,
+      "General Query": 1181
+    },
+    "class_pct_Categories": {
+      "Urgent": 27.76,
+      "Emergency": 25.71,
+      "Routine": 24.09,
+      "General Query": 22.44
+    },
+    "class_balance_check": {
+      "all_classes_in_22_to_27_pct_range": false
+    },
+    "leakage_rule": "Action Needed column exists but MUST NOT be used as input feature, auxiliary target, prompt, or corpus sentence (annotation-derived, leaks the severity label)."
+  },
+  "chq_summ": {
+    "train": {
+      "rows": 1880,
+      "columns": [
+        "id",
+        "question",
+        "indices",
+        "summary"
+      ],
+      "missing_or_empty_question": 0,
+      "missing_or_empty_summary": 0,
+      "token_length_stats_question": {
+        "median": 62.0,
+        "p90": 97.0,
+        "p95": 104.0,
+        "p99": 116.21000000000004,
+        "max": 169,
+        "mean": 67.46170212765958
+      },
+      "token_length_stats_summary": {
+        "median": 28.0,
+        "p90": 44.0,
+        "p95": 50.0,
+        "p99": 65.0,
+        "max": 86,
+        "mean": 29.320212765957447
+      },
+      "script_mix_question": {
+        "n": 1880,
+        "empty_or_missing": 0,
+        "pct_empty_or_missing": 0.0,
+        "contains_bangla_pct": 100.0,
+        "contains_latin_pct": 0.9,
+        "mixed_script_pct": 0.9,
+        "contains_digit_pct": 76.97,
+        "contains_url_pct": 0.0,
+        "contains_zero_width_or_bom_pct": 3.3
+      },
+      "exact_duplicates_question": {
+        "duplicate_groups": 0,
+        "rows_involved_in_duplicates": 0,
+        "pct_rows_duplicated": 0.0
+      }
+    },
+    "valid": {
+      "rows": 235,
+      "columns": [
+        "id",
+        "question",
+        "indices",
+        "summary"
+      ],
+      "missing_or_empty_question": 0,
+      "missing_or_empty_summary": 0,
+      "token_length_stats_question": {
+        "median": 59.0,
+        "p90": 96.0,
+        "p95": 106.0,
+        "p99": 113.66,
+        "max": 141,
+        "mean": 66.19148936170212
+      },
+      "token_length_stats_summary": {
+        "median": 30.0,
+        "p90": 45.0,
+        "p95": 49.0,
+        "p99": 63.619999999999976,
+        "max": 86,
+        "mean": 30.029787234042555
+      },
+      "script_mix_question": {
+        "n": 235,
+        "empty_or_missing": 0,
+        "pct_empty_or_missing": 0.0,
+        "contains_bangla_pct": 100.0,
+        "contains_latin_pct": 1.7,
+        "mixed_script_pct": 1.7,
+        "contains_digit_pct": 76.17,
+        "contains_url_pct": 0.0,
+        "contains_zero_width_or_bom_pct": 5.53
+      },
+      "exact_duplicates_question": {
+        "duplicate_groups": 0,
+        "rows_involved_in_duplicates": 0,
+        "pct_rows_duplicated": 0.0
+      }
+    },
+    "test": {
+      "rows": 235,
+      "columns": [
+        "id",
+        "question",
+        "indices",
+        "summary"
+      ],
+      "missing_or_empty_question": 0,
+      "missing_or_empty_summary": 0,
+      "token_length_stats_question": {
+        "median": 64.0,
+        "p90": 97.6,
+        "p95": 109.0,
+        "p99": 113.66,
+        "max": 147,
+        "mean": 68.55744680851063
+      },
+      "token_length_stats_summary": {
+        "median": 29.0,
+        "p90": 44.0,
+        "p95": 51.0,
+        "p99": 66.66,
+        "max": 84,
+        "mean": 29.719148936170214
+      },
+      "script_mix_question": {
+        "n": 235,
+        "empty_or_missing": 0,
+        "pct_empty_or_missing": 0.0,
+        "contains_bangla_pct": 100.0,
+        "contains_latin_pct": 0.85,
+        "mixed_script_pct": 0.85,
+        "contains_digit_pct": 74.89,
+        "contains_url_pct": 0.0,
+        "contains_zero_width_or_bom_pct": 3.83
+      },
+      "exact_duplicates_question": {
+        "duplicate_groups": 0,
+        "rows_involved_in_duplicates": 0,
+        "pct_rows_duplicated": 0.0
+      }
+    }
+  },
+  "banglahealth": {
+    "hf_split_name": "train",
+    "rows": 200000,
+    "columns": [
+      "sl",
+      "id",
+      "source_sentence",
+      "paraphrased_sentence"
+    ],
+    "missing_or_empty_source_sentence": 0,
+    "missing_or_empty_paraphrased_sentence": 0,
+    "token_length_stats_source_sentence": {
+      "median": 11.0,
+      "p90": 21.0,
+      "p95": 25.0,
+      "p99": 38.0,
+      "max": 341,
+      "mean": 12.66622
+    },
+    "token_length_stats_paraphrased_sentence": {
+      "median": 11.0,
+      "p90": 20.0,
+      "p95": 24.0,
+      "p99": 35.0,
+      "max": 92,
+      "mean": 12.102115
+    },
+    "script_mix_source_sentence": {
+      "n": 200000,
+      "empty_or_missing": 0,
+      "pct_empty_or_missing": 0.0,
+      "contains_bangla_pct": 99.99,
+      "contains_latin_pct": 1.42,
+      "mixed_script_pct": 1.41,
+      "contains_digit_pct": 13.34,
+      "contains_url_pct": 0.0,
+      "contains_zero_width_or_bom_pct": 0.19
+    },
+    "exact_duplicates_source_sentence": {
+      "duplicate_groups": 57160,
+      "rows_involved_in_duplicates": 124997,
+      "pct_rows_duplicated": 62.5
+    },
+    "exact_duplicates_paraphrased_sentence": {
+      "duplicate_groups": 54278,
+      "rows_involved_in_duplicates": 120242,
+      "pct_rows_duplicated": 60.12
+    },
+    "unique_source_sentences": 132575,
+    "mean_paraphrases_per_unique_source": 1.51,
+    "top_5_most_repeated_source_sentences": {
+      "লেখক অধ্যাপক মেডিসিন বিভাগ বারডেম হাসপাতাল ঢাকা": 74,
+      "সভাপতি ডায়াবেটিস নিউট্রিশনিস্ট সোসাইটি অব বাংলাদেশ পপুলার ডায়াগনস্টিক সেন্টার শ্যামলী ও অ্যাডভান্স হাসপাতাল ঢাকা": 36,
+      "লেখক  চিফ নিউট্রিশন অফিসার ও বিভাগীয় প্রধান অব বারডেম": 30,
+      "ডা ফারাহ দোলা বিশেষ ভারপ্রাপ্ত কর্মকর্তা স্বাস্থ্য অধিদপ্তর": 27,
+      "লেখক  মুখ ও দন্তরোগ বিশেষজ্ঞ": 26
+    },
+    "boilerplate_warning": "Most-repeated source sentences look like author/byline boilerplate (e.g. 'লেখক ... বিভাগ ... হাসপাতাল') rather than health content. Consider filtering very-short, highly-repeated lines during Phase 4 corpus construction so they do not dominate FastText training.",
+    "usage_note": "Use only as unlabeled corpus text (Phase 4). Do not derive severity or NER labels from it."
+  }
+}

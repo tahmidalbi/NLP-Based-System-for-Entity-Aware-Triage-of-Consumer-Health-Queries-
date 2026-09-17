@@ -1,0 +1,15 @@
+# Large binary artifacts - never commit these
+embeddings/*.bin
+embeddings/*.vec
+checkpoints/*.pt
+data/processed/
+logs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Hugging Face / dataset caches
+.cache/
