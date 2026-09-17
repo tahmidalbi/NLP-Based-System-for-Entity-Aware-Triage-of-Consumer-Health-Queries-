@@ -1,0 +1,116 @@
+{
+  "healthner_frozen_split_sizes": {
+    "train": 25426,
+    "valid": 3178,
+    "test": 3179
+  },
+  "severity_split": {
+    "total_rows": 5263,
+    "total_groups": 5192,
+    "exact_or_near_duplicate_groups": 69,
+    "near_duplicate_pairs_found": 72,
+    "mixed_label_duplicate_groups": 3,
+    "mixed_label_group_examples": [
+      {
+        "rows": [
+          227,
+          2537
+        ],
+        "labels": [
+          "Emergency",
+          "Urgent"
+        ]
+      },
+      {
+        "rows": [
+          234,
+          2577
+        ],
+        "labels": [
+          "Routine",
+          "Urgent"
+        ]
+      },
+      {
+        "rows": [
+          237,
+          2629
+        ],
+        "labels": [
+          "General Query",
+          "Urgent"
+        ]
+      }
+    ],
+    "split_sizes": {
+      "train": 4211,
+      "val": 526,
+      "test": 526
+    },
+    "split_class_pct": {
+      "train": {
+        "Urgent": 27.76,
+        "Emergency": 25.69,
+        "Routine": 24.1,
+        "General Query": 22.44
+      },
+      "val": {
+        "Urgent": 27.57,
+        "Emergency": 25.86,
+        "Routine": 24.14,
+        "General Query": 22.43
+      },
+      "test": {
+        "Urgent": 27.95,
+        "Emergency": 25.67,
+        "Routine": 23.95,
+        "General Query": 22.43
+      }
+    },
+    "per_class_row_targets": {
+      "Emergency": {
+        "train": 1082,
+        "val": 135,
+        "test": 135
+      },
+      "General Query": {
+        "train": 944,
+        "val": 118,
+        "test": 118
+      },
+      "Routine": {
+        "train": 1014,
+        "val": 127,
+        "test": 126
+      },
+      "Urgent": {
+        "train": 1171,
+        "val": 146,
+        "test": 147
+      }
+    },
+    "per_class_row_actual": {
+      "Emergency": {
+        "train": 1082,
+        "val": 135,
+        "test": 135
+      },
+      "General Query": {
+        "train": 944,
+        "val": 118,
+        "test": 118
+      },
+      "Routine": {
+        "train": 1014,
+        "val": 127,
+        "test": 126
+      },
+      "Urgent": {
+        "train": 1171,
+        "val": 146,
+        "test": 147
+      }
+    }
+  },
+  "held_out_fingerprint_count": 7403
+}
