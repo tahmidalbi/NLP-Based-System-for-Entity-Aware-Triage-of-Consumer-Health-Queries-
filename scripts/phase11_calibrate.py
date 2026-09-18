@@ -34,7 +34,7 @@ from pathlib import Path
 
 import torch
 
-from model import BanglaCareModel
+from arch_adapter import ARCHS, Arch
 from severity_eval import (
     _nll,
     choose_review_threshold,
@@ -49,8 +49,6 @@ from train_utils import (
     ROOT,
     get_device,
     load_checkpoint,
-    load_featurizer,
-    severity_loader,
     write_json,
     write_text,
 )
@@ -59,13 +57,11 @@ FIGURES = ROOT / "figures"
 
 
 @torch.no_grad()
-def collect_val_logits(model, loader, device):
-    model.eval()
+def collect_val_logits(arch, loader):
+    arch.model.eval()
     all_logits, all_labels = [], []
     for batch in loader:
-        features = batch["features"].to(device, non_blocking=True)
-        mask = batch["mask"].to(device, non_blocking=True)
-        logits, _ = model.severity_forward(features, batch["lengths"], mask)
+        logits = arch.severity_forward(batch)
         all_logits.append(logits.float().cpu())
         all_labels.append(batch["severity_ids"])
     return torch.cat(all_logits).numpy(), torch.cat(all_labels).numpy()
@@ -112,8 +108,13 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Phase 11 - calibration")
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--cache", type=Path, default=DEFAULT_CACHE)
-    parser.add_argument("--joint-checkpoint", type=Path, default=CHECKPOINTS / "best_joint.pt")
-    parser.add_argument("--out", type=Path, default=CHECKPOINTS / "calibration.json")
+    parser.add_argument("--arch", choices=ARCHS, default="bilstm",
+                        help="transformer writes checkpoints/calibration_transformer.json "
+                             "and results/transformer_* so BiLSTM outputs are kept")
+    parser.add_argument("--model-name", default=None, help="transformer encoder id")
+    parser.add_argument("--no-normalize", action="store_true")
+    parser.add_argument("--joint-checkpoint", type=Path, default=None)
+    parser.add_argument("--out", type=Path, default=None)
     parser.add_argument("--n-bins", type=int, default=15, help="reliability-diagram bin count")
     parser.add_argument("--cpu", action="store_true")
     parser.add_argument("--limit", type=int, default=None)
@@ -123,22 +124,28 @@ def parse_args():
 
 def main():
     args = parse_args()
+    prefix = "" if args.arch == "bilstm" else "transformer_"
+    if args.joint_checkpoint is None:
+        args.joint_checkpoint = CHECKPOINTS / (
+            "best_joint.pt" if args.arch == "bilstm" else "best_joint_transformer.pt")
+    if args.out is None:
+        args.out = CHECKPOINTS / (
+            "calibration.json" if args.arch == "bilstm" else "calibration_transformer.json")
     limit = args.limit if args.limit is not None else (200 if args.smoke else None)
 
     device = get_device(prefer_cuda=not args.cpu)
-    print("BanglaCare - Phase 11: confidence calibration")
+    print(f"BanglaCare - Phase 11: confidence calibration ({args.arch})")
     print("=" * 60)
     print(f"device: {device}")
     print(f"loading Phase 10 checkpoint from {args.joint_checkpoint}")
     print("using severity VALIDATION only - test sets are untouched (guide 14.1)")
 
-    featurizer = load_featurizer(args.cache)
-    val_loader = severity_loader(featurizer, "val", args.batch_size, shuffle=False, limit=limit)
+    arch = Arch(args.arch, device, cache=args.cache, model_name=args.model_name,
+                no_normalize=args.no_normalize)
+    val_loader = arch.severity_loader("val", args.batch_size, shuffle=False, limit=limit)
+    load_checkpoint(args.joint_checkpoint, arch.model, device=device, strict=True)
 
-    model = BanglaCareModel().to(device)
-    load_checkpoint(args.joint_checkpoint, model, device=device, strict=True)
-
-    logits, labels = collect_val_logits(model, val_loader, device)
+    logits, labels = collect_val_logits(arch, val_loader)
     print(f"collected {len(labels)} validation logits")
 
     temperature, fitted_nll = fit_temperature(logits, labels)
@@ -173,7 +180,7 @@ def main():
         f"of correct predictions"
     )
 
-    plotted = maybe_plot_reliability(bins_before, bins_after, FIGURES / "reliability_plot.png")
+    plotted = maybe_plot_reliability(bins_before, bins_after, FIGURES / f"{prefix}reliability_plot.png")
 
     calibration = {
         "temperature": temperature,
@@ -197,7 +204,7 @@ def main():
         "reliability_bins_before": bins_before,
         "reliability_bins_after": bins_after,
     }
-    write_json(RESULTS / "phase11_calibration.json", summary)
+    write_json(RESULTS / f"{prefix}phase11_calibration.json", summary)
 
     report = "\n".join([
         "# BanglaCare - Phase 11 calibration",
@@ -225,10 +232,10 @@ def main():
         f"of correct predictions",
         f"- {threshold_stats.get('pct_of_validation_flagged', 0):.1%} of validation would be flagged",
         "",
-        f"## Reliability diagram: {'figures/reliability_plot.png' if plotted else 'skipped (matplotlib unavailable)'}",
+        f"## Reliability diagram: {f'figures/{prefix}reliability_plot.png' if plotted else 'skipped (matplotlib unavailable)'}",
     ])
-    write_text(RESULTS / "phase11_calibration.md", report)
-    print(f"wrote {RESULTS / 'phase11_calibration.md'}")
+    write_text(RESULTS / f"{prefix}phase11_calibration.md", report)
+    print(f"wrote {RESULTS / f'{prefix}phase11_calibration.md'}")
 
 
 if __name__ == "__main__":

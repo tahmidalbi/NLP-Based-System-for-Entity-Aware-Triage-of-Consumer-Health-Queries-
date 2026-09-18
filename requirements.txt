@@ -43,3 +43,11 @@ pytorch-crf==0.7.2       # provides the `torchcrf` module (linear-chain CRF for 
 # (building from source requires MSVC on Windows). Training on Kaggle is
 # unaffected - Kaggle runs 3.11.
 # gradio>=4.0
+
+# ---------------------------------------------------------------------------
+# Transformer variant ONLY (TRANSFORMER_PLAN.md) - not needed for the BiLSTM pipeline.
+# ---------------------------------------------------------------------------
+# transformers>=4.40
+# tokenizers
+# sentencepiece
+# git+https://github.com/csebuetnlp/normalizer   # required by csebuetnlp/banglabert

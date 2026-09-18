@@ -50,7 +50,7 @@ from pathlib import Path
 import torch
 
 from labels import ENTITY_TYPES, NER_ID2LABEL, SEVERITY_ID2LABEL
-from model import BanglaCareModel
+from arch_adapter import ARCHS, Arch
 from ner_eval import NEREvaluator, extract_spans
 from ner_eval import format_report as format_ner_report
 from severity_eval import SeverityEvaluator, softmax
@@ -63,9 +63,6 @@ from train_utils import (
     ROOT,
     get_device,
     load_checkpoint,
-    load_featurizer,
-    ner_loader,
-    severity_loader,
     write_json,
     write_text,
 )
@@ -93,17 +90,14 @@ def has_negation(text):
 
 
 @torch.no_grad()
-def run_severity_test(model, loader, texts, device):
-    model.eval()
+def run_severity_test(arch, loader, texts):
+    arch.model.eval()
     evaluator = SeverityEvaluator()
     rows = []
     for batch, batch_texts in zip(loader, _chunks(texts, loader.batch_size)):
-        features = batch["features"].to(device, non_blocking=True)
-        mask = batch["mask"].to(device, non_blocking=True)
         targets = batch["severity_ids"]
 
-        logits, _ = model.severity_forward(features, batch["lengths"], mask)
-        logits = logits.float().cpu()
+        logits = arch.severity_forward(batch).float().cpu()
         evaluator.add_batch(logits, targets)
 
         for text, logit_row, gold in zip(batch_texts, logits.numpy(), targets.tolist()):
@@ -145,16 +139,13 @@ def write_severity_predictions(path, rows, temperature):
 
 
 @torch.no_grad()
-def run_ner_test(model, loader, device, strict=False):
-    model.eval()
+def run_ner_test(arch, loader, strict=False):
+    arch.model.eval()
     evaluator = NEREvaluator(strict=strict)
     rows = []
     for batch in loader:
-        features = batch["features"].to(device, non_blocking=True)
-        mask = batch["mask"].to(device, non_blocking=True)
-
-        emissions, _ = model.ner_forward(features, batch["lengths"], mask)
-        predictions = model.ner_head.decode(emissions.float(), mask)
+        emissions, mask = arch.ner_forward(batch)
+        predictions = arch.model.ner_head.decode(emissions.float(), mask)
         evaluator.add_batch(predictions, batch["ner_tags"], batch["lengths"])
 
         gold_rows = batch["ner_tags"].tolist()
@@ -312,8 +303,13 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Phase 12 - final evaluation")
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--cache", type=Path, default=DEFAULT_CACHE)
-    parser.add_argument("--joint-checkpoint", type=Path, default=CHECKPOINTS / "best_joint.pt")
-    parser.add_argument("--calibration", type=Path, default=CHECKPOINTS / "calibration.json")
+    parser.add_argument("--arch", choices=ARCHS, default="bilstm",
+                        help="transformer reads *_transformer checkpoints and writes "
+                             "results/transformer_* so BiLSTM outputs are kept")
+    parser.add_argument("--model-name", default=None, help="transformer encoder id")
+    parser.add_argument("--no-normalize", action="store_true")
+    parser.add_argument("--joint-checkpoint", type=Path, default=None)
+    parser.add_argument("--calibration", type=Path, default=None)
     parser.add_argument("--strict-iob", action="store_true")
     parser.add_argument("--cpu", action="store_true")
     parser.add_argument("--limit", type=int, default=None)
@@ -323,10 +319,17 @@ def parse_args():
 
 def main():
     args = parse_args()
+    prefix = "" if args.arch == "bilstm" else "transformer_"
+    if args.joint_checkpoint is None:
+        args.joint_checkpoint = CHECKPOINTS / (
+            "best_joint.pt" if args.arch == "bilstm" else "best_joint_transformer.pt")
+    if args.calibration is None:
+        args.calibration = CHECKPOINTS / (
+            "calibration.json" if args.arch == "bilstm" else "calibration_transformer.json")
     limit = args.limit if args.limit is not None else (200 if args.smoke else None)
 
     device = get_device(prefer_cuda=not args.cpu)
-    print("BanglaCare - Phase 12: final evaluation")
+    print(f"BanglaCare - Phase 12: final evaluation ({args.arch})")
     print("=" * 60)
     print(f"device: {device}")
     print(f"loading checkpoint {args.joint_checkpoint}")
@@ -339,41 +342,41 @@ def main():
     threshold = calibration["review_threshold"]
     print(f"calibration: T={temperature:.4f}, review threshold={threshold:.4f}")
 
-    featurizer = load_featurizer(args.cache)
-    model = BanglaCareModel().to(device)
-    load_checkpoint(args.joint_checkpoint, model, device=device, strict=True)
+    arch = Arch(args.arch, device, cache=args.cache, model_name=args.model_name,
+                no_normalize=args.no_normalize)
+    load_checkpoint(args.joint_checkpoint, arch.model, device=device, strict=True)
 
     # ---------------------------------------------------------- severity
-    sev_loader = severity_loader(featurizer, "test", args.batch_size, shuffle=False, limit=limit)
+    sev_loader = arch.severity_loader("test", args.batch_size, shuffle=False, limit=limit)
     sev_texts = load_severity_texts("test")[:limit] if limit else load_severity_texts("test")
-    sev_evaluator, sev_rows = run_severity_test(model, sev_loader, sev_texts, device)
+    sev_evaluator, sev_rows = run_severity_test(arch, sev_loader, sev_texts)
     sev_metrics = sev_evaluator.compute(temperature=temperature)
 
     print(f"\nseverity test macro-F1: {sev_metrics['macro_f1']:.4f}  "
           f"accuracy: {sev_metrics['accuracy']:.4f}  "
           f"emergency-recall: {sev_metrics['emergency_recall']:.4f}")
 
-    write_json(RESULTS / "phase12_severity_test.json", sev_metrics)
+    write_json(RESULTS / f"{prefix}phase12_severity_test.json", sev_metrics)
     write_text(
-        RESULTS / "phase12_severity_test.md",
+        RESULTS / f"{prefix}phase12_severity_test.md",
         format_severity_report(sev_metrics, title="BanglaCare - Phase 12 severity TEST results"),
     )
-    write_severity_predictions(RESULTS / "phase12_predictions_severity.csv", sev_rows, temperature)
+    write_severity_predictions(RESULTS / f"{prefix}phase12_predictions_severity.csv", sev_rows, temperature)
 
     # -------------------------------------------------------------- NER
-    ner_test_loader = ner_loader(featurizer, "test", args.batch_size, shuffle=False, limit=limit)
-    ner_evaluator, ner_rows = run_ner_test(model, ner_test_loader, device, strict=args.strict_iob)
+    ner_test_loader = arch.ner_loader("test", args.batch_size, shuffle=False, limit=limit)
+    ner_evaluator, ner_rows = run_ner_test(arch, ner_test_loader, strict=args.strict_iob)
     ner_metrics = ner_evaluator.compute()
 
     print(f"NER test entity-F1: {ner_metrics['entity_f1']:.4f}  "
           f"P: {ner_metrics['entity_precision']:.4f}  R: {ner_metrics['entity_recall']:.4f}")
 
-    write_json(RESULTS / "phase12_ner_test.json", ner_metrics)
+    write_json(RESULTS / f"{prefix}phase12_ner_test.json", ner_metrics)
     write_text(
-        RESULTS / "phase12_ner_test.md",
+        RESULTS / f"{prefix}phase12_ner_test.md",
         format_ner_report(ner_metrics, title="BanglaCare - Phase 12 NER TEST results"),
     )
-    write_ner_predictions(RESULTS / "phase12_predictions_ner.json", ner_rows)
+    write_ner_predictions(RESULTS / f"{prefix}phase12_predictions_ner.json", ner_rows)
 
     # ---------------------------------------------------------- error analysis
     lengths = sorted(len(t.split()) for t in sev_texts)
@@ -404,9 +407,9 @@ def main():
             "manual review instead (guide 15.3)."
         ),
     }
-    write_json(RESULTS / "phase12_error_analysis.json", error_analysis)
+    write_json(RESULTS / f"{prefix}phase12_error_analysis.json", error_analysis)
     write_error_sample(
-        RESULTS / "phase12_error_sample.csv", sev_categorized, ner_error_analysis["examples"]
+        RESULTS / f"{prefix}phase12_error_sample.csv", sev_categorized, ner_error_analysis["examples"]
     )
 
     top_confusions = sorted(confusion_pairs.items(), key=lambda kv: -kv[1])[:5]
@@ -456,7 +459,7 @@ def main():
         "`results/phase12_error_sample.csv` (long queries, code-switching, "
         "negation, low-confidence, and NER misses by type).",
     ])
-    write_text(RESULTS / "phase12_error_analysis.md", report)
+    write_text(RESULTS / f"{prefix}phase12_error_analysis.md", report)
 
     print("\n" + "=" * 60)
     print("Phase 12 complete. Written to results/:")
@@ -465,7 +468,7 @@ def main():
         "phase12_predictions_severity.csv", "phase12_predictions_ner.json",
         "phase12_error_sample.csv",
     ]:
-        print(f"  {name}")
+        print(f"  {prefix}{name}")
 
 
 if __name__ == "__main__":

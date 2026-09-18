@@ -1,0 +1,61 @@
+{
+  "model": "csebuetnlp/banglabert",
+  "max_len": 512,
+  "stats": {
+    "ner_train": {
+      "n": 25426,
+      "median": 40.0,
+      "p95": 110.0,
+      "p99": 161.75,
+      "max": 556,
+      "over_limit": 2,
+      "over_limit_pct": 7.865963973885e-05
+    },
+    "ner_valid": {
+      "n": 3178,
+      "median": 40.0,
+      "p95": 111.0,
+      "p99": 160.23000000000002,
+      "max": 433,
+      "over_limit": 0,
+      "over_limit_pct": 0.0
+    },
+    "ner_test": {
+      "n": 3179,
+      "median": 40.0,
+      "p95": 110.0,
+      "p99": 169.4399999999996,
+      "max": 369,
+      "over_limit": 0,
+      "over_limit_pct": 0.0
+    },
+    "severity_train": {
+      "n": 4211,
+      "median": 17.0,
+      "p95": 33.0,
+      "p99": 55.0,
+      "max": 70,
+      "over_limit": 0,
+      "over_limit_pct": 0.0
+    },
+    "severity_val": {
+      "n": 526,
+      "median": 17.0,
+      "p95": 30.75,
+      "p99": 57.75,
+      "max": 62,
+      "over_limit": 0,
+      "over_limit_pct": 0.0
+    },
+    "severity_test": {
+      "n": 526,
+      "median": 17.0,
+      "p95": 31.0,
+      "p99": 51.25,
+      "max": 56,
+      "over_limit": 0,
+      "over_limit_pct": 0.0
+    }
+  },
+  "decision": "Plain truncation is fine (<1% of NER examples exceed the cap). Log the truncated counts (the loaders print them)."
+}
