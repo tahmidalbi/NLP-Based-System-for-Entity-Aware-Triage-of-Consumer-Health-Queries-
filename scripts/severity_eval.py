@@ -85,6 +85,100 @@ def expected_calibration_error(probs, labels, n_bins=15):
     return float(ece), bins
 
 
+def _nll(logits, labels, temperature):
+    """Mean negative log-likelihood of the gold class under softmax(logits/T)."""
+    probs = softmax(logits, temperature)
+    picked = probs[np.arange(len(labels)), labels]
+    picked = np.clip(picked, 1e-12, 1.0)  # guard log(0) from a saturated softmax
+    return float(-np.log(picked).mean())
+
+
+def fit_temperature(logits, labels, t_min=0.05, t_max=5.0, coarse_steps=200, refine_rounds=6):
+    """Scalar temperature scaling (guide 14.2): the T minimizing validation NLL.
+
+    Pure numpy grid search rather than a gradient-based fit (e.g. LBFGS on
+    log T): NLL(T) for a fixed, tiny 4-class logit set is a cheap 1D function
+    to evaluate a few hundred times, and a search needs no autograd, no
+    convexity assumption, and cannot diverge. Coarse log-spaced pass to find
+    the neighbourhood, then a few rounds of golden-section-style bisection to
+    refine it.
+
+    Temperature scaling does not change which class wins the softmax (guide
+    14.2), so this must be fit AFTER checkpoint selection, only to calibrate
+    the confidence number - never used to pick the checkpoint itself.
+    """
+    logits = np.asarray(logits, dtype=np.float64)
+    labels = np.asarray(labels, dtype=np.int64)
+
+    grid = np.geomspace(t_min, t_max, coarse_steps)
+    losses = [_nll(logits, labels, t) for t in grid]
+    best_idx = int(np.argmin(losses))
+    best_t = float(grid[best_idx])
+
+    lo = grid[max(best_idx - 1, 0)]
+    hi = grid[min(best_idx + 1, len(grid) - 1)]
+    for _ in range(refine_rounds):
+        candidates = np.linspace(lo, hi, 9)
+        cand_losses = [_nll(logits, labels, t) for t in candidates]
+        i = int(np.argmin(cand_losses))
+        best_t = float(candidates[i])
+        lo = candidates[max(i - 1, 0)]
+        hi = candidates[min(i + 1, len(candidates) - 1)]
+
+    return best_t, _nll(logits, labels, best_t)
+
+
+def choose_review_threshold(confidences, is_error):
+    """Data-driven low-confidence threshold (guide 14.3): never hard-code 0.5/0.7.
+
+    Frames "should this prediction be flagged for human review" as a binary
+    detector built on confidence alone, with ground truth = "the model's
+    prediction was wrong". Sweeps every confidence value seen in validation as
+    a candidate threshold (flag if confidence < threshold) and keeps the one
+    maximising Youden's J = TPR - FPR, i.e. the threshold that best separates
+    the model's errors from its correct predictions using confidence alone.
+
+    Returns (threshold, stats) where stats reports what that threshold would
+    actually do on the validation set - so the choice can be sanity-checked
+    (see phase11's report) instead of trusted blindly.
+    """
+    confidences = np.asarray(confidences, dtype=np.float64)
+    is_error = np.asarray(is_error, dtype=bool)
+    n_errors = int(is_error.sum())
+    n_correct = int((~is_error).sum())
+
+    if n_errors == 0 or n_correct == 0:
+        # Degenerate validation set (all correct or all wrong): no confidence
+        # threshold can separate the two classes, so fall back to flagging
+        # nothing rather than fabricating a boundary from no signal.
+        return 0.0, {
+            "n_errors": n_errors, "n_correct": n_correct,
+            "youden_j": 0.0, "note": "degenerate validation set; threshold disabled",
+        }
+
+    candidates = np.unique(confidences)
+    best_j, best_t = -1.0, float(candidates.min())
+
+    for t in candidates:
+        flagged = confidences < t
+        tpr = float((flagged & is_error).sum()) / n_errors     # errors caught
+        fpr = float((flagged & ~is_error).sum()) / n_correct   # correct ones needlessly flagged
+        j = tpr - fpr
+        if j > best_j:
+            best_j, best_t = j, float(t)
+
+    flagged = confidences < best_t
+    stats = {
+        "n_errors": n_errors,
+        "n_correct": n_correct,
+        "youden_j": best_j,
+        "errors_caught_recall": float((flagged & is_error).sum()) / n_errors,
+        "correct_needlessly_flagged_rate": float((flagged & ~is_error).sum()) / n_correct,
+        "pct_of_validation_flagged": float(flagged.mean()),
+    }
+    return best_t, stats
+
+
 class SeverityEvaluator:
     """Accumulates logits + gold labels across a validation/test pass."""
 
