@@ -1,0 +1,8 @@
+{
+  "temperature": 1.6357627567687625,
+  "review_threshold": 0.9196434518026173,
+  "fitted_on": "severity validation split only",
+  "source_checkpoint": "/kaggle/working/bc/checkpoints/best_joint.pt",
+  "n_validation_examples": 526,
+  "boundary_warning": null
+}

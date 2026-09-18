@@ -24,5 +24,22 @@ datasets==5.0.1          # Hugging Face Datasets, for loading BanglaHealth
 fasttext-wheel==0.9.2    # provides the `fasttext` module; do NOT also install `fasttext`
 
 # Phase 7 (data pipeline) / Section 10 (model architecture)
+# Phases 8-12 (NER pretraining, severity warm-up, joint fine-tuning,
+# calibration, final evaluation) need nothing beyond these two.
 torch==2.5.1+cu121
 pytorch-crf==0.7.2       # provides the `torchcrf` module (linear-chain CRF for the NER head)
+
+# ---------------------------------------------------------------------------
+# Optional extras - NOT needed to train or evaluate the pipeline above.
+# ---------------------------------------------------------------------------
+
+# Phase 11 reliability diagram. phase11_calibrate.py degrades gracefully with a
+# printed warning if this is missing; the numeric bins are still written to
+# results/phase11_calibration.json either way.
+# matplotlib>=3.7
+
+# Demo app (app/app.py). Note: fasttext-wheel 0.9.2 ships no prebuilt wheel for
+# Python 3.13+, so on a 3.13 machine the demo needs a 3.11/3.12 virtualenv
+# (building from source requires MSVC on Windows). Training on Kaggle is
+# unaffected - Kaggle runs 3.11.
+# gradio>=4.0

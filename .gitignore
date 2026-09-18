@@ -8,8 +8,12 @@ logs/
 # Python
 __pycache__/
 *.pyc
-.venv/
+.venv*/
 venv/
+
+# Downloaded Kaggle output bundles (the useful contents are extracted into
+# results/, figures/ and checkpoints/ and committed individually)
+*.zip
 
 # Hugging Face / dataset caches
 .cache/
