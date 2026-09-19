@@ -1,0 +1,8 @@
+{
+  "temperature": 1.214179917995424,
+  "review_threshold": 0.9391917627884842,
+  "fitted_on": "severity validation split only",
+  "source_checkpoint": "/kaggle/working/checkpoints/best_joint_transformer.pt",
+  "n_validation_examples": 526,
+  "boundary_warning": null
+}

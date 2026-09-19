@@ -1,0 +1,206 @@
+{
+  "config": {
+    "phase": "T8",
+    "model_name": "csebuetnlp/banglabert",
+    "normalize": true,
+    "optimizer": "AdamW",
+    "lr_encoder": 2e-05,
+    "lr_head": 0.001,
+    "weight_decay": 0.01,
+    "warmup_frac": 0.1,
+    "batch_size": 16,
+    "grad_clip": 1.0,
+    "max_epochs": 5,
+    "early_stopping_patience": 2,
+    "mixed_precision": true,
+    "seed": 42,
+    "strict_iob": false,
+    "selection_metric": "validation entity-level F1",
+    "smoke": false,
+    "total_parameters": 111029778,
+    "trainable_parameters": 110038542
+  },
+  "best_epoch": 5,
+  "best_val_entity_f1": 0.6321952350588371,
+  "epochs_run": 5,
+  "train_seconds": 1794.1801080703735,
+  "best_metrics": {
+    "strict": false,
+    "n_sequences": 3178,
+    "n_tokens": 115037,
+    "entity_precision": 0.6186046511627907,
+    "entity_recall": 0.6463963963963963,
+    "entity_f1": 0.6321952350588371,
+    "micro_f1": 0.6321952350588371,
+    "macro_f1": 0.6770505683127428,
+    "gold_spans": 8436,
+    "predicted_spans": 8815,
+    "per_type": {
+      "Symptom": {
+        "precision": 0.47028633171258777,
+        "recall": 0.5031791907514451,
+        "f1": 0.4861770455180117,
+        "support": 3460,
+        "predicted": 3702,
+        "tp": 1741,
+        "fp": 1961,
+        "fn": 1719
+      },
+      "Health Condition": {
+        "precision": 0.5367647058823529,
+        "recall": 0.5558375634517766,
+        "f1": 0.5461346633416458,
+        "support": 788,
+        "predicted": 816,
+        "tp": 438,
+        "fp": 378,
+        "fn": 350
+      },
+      "Medicine": {
+        "precision": 0.834051724137931,
+        "recall": 0.8691746209994385,
+        "f1": 0.8512510310695627,
+        "support": 1781,
+        "predicted": 1856,
+        "tp": 1548,
+        "fp": 308,
+        "fn": 233
+      },
+      "Age": {
+        "precision": 0.7950413223140496,
+        "recall": 0.8084033613445378,
+        "f1": 0.8016666666666666,
+        "support": 595,
+        "predicted": 605,
+        "tp": 481,
+        "fp": 124,
+        "fn": 114
+      },
+      "Dosage": {
+        "precision": 0.5237467018469657,
+        "recall": 0.520997375328084,
+        "f1": 0.5223684210526317,
+        "support": 762,
+        "predicted": 758,
+        "tp": 397,
+        "fp": 361,
+        "fn": 365
+      },
+      "Specialist": {
+        "precision": 0.8547249647390691,
+        "recall": 0.8719424460431655,
+        "f1": 0.8632478632478633,
+        "support": 695,
+        "predicted": 709,
+        "tp": 606,
+        "fp": 103,
+        "fn": 89
+      },
+      "Medical Procedure": {
+        "precision": 0.6558265582655827,
+        "recall": 0.6816901408450704,
+        "f1": 0.6685082872928176,
+        "support": 355,
+        "predicted": 369,
+        "tp": 242,
+        "fp": 127,
+        "fn": 113
+      }
+    },
+    "token_precision": 0.7517561010934898,
+    "token_recall": 0.7650808858753732,
+    "token_f1": 0.7583599671262898
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 15.981061265834862,
+      "val_loss": 7.083577500866073,
+      "val_entity_f1": 0.598971121244008,
+      "val_entity_precision": 0.5908881199538639,
+      "val_entity_recall": 0.6072783309625415,
+      "val_macro_f1": 0.6390174357368777,
+      "val_per_type_f1": {
+        "Symptom": 0.4731894611412683,
+        "Health Condition": 0.4647993943981832,
+        "Medicine": 0.815606936416185,
+        "Age": 0.793103448275862,
+        "Dosage": 0.44280936454849495,
+        "Specialist": 0.8571428571428571,
+        "Medical Procedure": 0.6264705882352941
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 5.686026977440642,
+      "val_loss": 5.637748073376223,
+      "val_entity_f1": 0.614612188365651,
+      "val_entity_precision": 0.5988529014844804,
+      "val_entity_recall": 0.6312233285917497,
+      "val_macro_f1": 0.6543057846270702,
+      "val_per_type_f1": {
+        "Symptom": 0.4792849035187287,
+        "Health Condition": 0.4867256637168142,
+        "Medicine": 0.8319694489907256,
+        "Age": 0.7999999999999999,
+        "Dosage": 0.48,
+        "Specialist": 0.8684971098265897,
+        "Medical Procedure": 0.6336633663366338
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 4.363699630740905,
+      "val_loss": 5.153564163241618,
+      "val_entity_f1": 0.6265617769551135,
+      "val_entity_precision": 0.6118391323994578,
+      "val_entity_recall": 0.6420104314841157,
+      "val_macro_f1": 0.6681566177657148,
+      "val_per_type_f1": {
+        "Symptom": 0.49006085192697774,
+        "Health Condition": 0.5442536327608983,
+        "Medicine": 0.8455329807959922,
+        "Age": 0.7983471074380165,
+        "Dosage": 0.4931880108991825,
+        "Specialist": 0.8522483940042827,
+        "Medical Procedure": 0.6534653465346535
+      }
+    },
+    {
+      "epoch": 4,
+      "train_loss": 3.680432237048852,
+      "val_loss": 5.134386274032881,
+      "val_entity_f1": 0.6293218664652217,
+      "val_entity_precision": 0.6172346973669213,
+      "val_entity_recall": 0.6418918918918919,
+      "val_macro_f1": 0.671669545503791,
+      "val_per_type_f1": {
+        "Symptom": 0.4861971830985915,
+        "Health Condition": 0.5325953259532596,
+        "Medicine": 0.8443590447433434,
+        "Age": 0.7959866220735785,
+        "Dosage": 0.5231788079470199,
+        "Specialist": 0.8664772727272728,
+        "Medical Procedure": 0.6528925619834711
+      }
+    },
+    {
+      "epoch": 5,
+      "train_loss": 3.247927490323794,
+      "val_loss": 5.20172364581224,
+      "val_entity_f1": 0.6321952350588371,
+      "val_entity_precision": 0.6186046511627907,
+      "val_entity_recall": 0.6463963963963963,
+      "val_macro_f1": 0.6770505683127428,
+      "val_per_type_f1": {
+        "Symptom": 0.4861770455180117,
+        "Health Condition": 0.5461346633416458,
+        "Medicine": 0.8512510310695627,
+        "Age": 0.8016666666666666,
+        "Dosage": 0.5223684210526317,
+        "Specialist": 0.8632478632478633,
+        "Medical Procedure": 0.6685082872928176
+      }
+    }
+  ]
+}

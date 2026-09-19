@@ -1,0 +1,1261 @@
+{
+  "severity": {
+    "total_errors": 43,
+    "confusion_pairs": {
+      "Routine -> Urgent": 12,
+      "Emergency -> Urgent": 8,
+      "Urgent -> Emergency": 8,
+      "Urgent -> Routine": 15
+    },
+    "long_query_errors": 3,
+    "code_switched_errors": 0,
+    "negation_present_errors": 18,
+    "would_have_been_flagged_for_review": 39,
+    "length_p90_tokens": 17
+  },
+  "ner": {
+    "per_type_errors": {
+      "Symptom": {
+        "missed": 500,
+        "boundary_error": 1302,
+        "type_confusion": 91
+      },
+      "Health Condition": {
+        "missed": 158,
+        "boundary_error": 99,
+        "type_confusion": 116
+      },
+      "Medicine": {
+        "missed": 110,
+        "boundary_error": 115,
+        "type_confusion": 27
+      },
+      "Age": {
+        "missed": 12,
+        "boundary_error": 101,
+        "type_confusion": 7
+      },
+      "Dosage": {
+        "missed": 62,
+        "boundary_error": 281,
+        "type_confusion": 15
+      },
+      "Specialist": {
+        "missed": 18,
+        "boundary_error": 59,
+        "type_confusion": 4
+      },
+      "Medical Procedure": {
+        "missed": 41,
+        "boundary_error": 36,
+        "type_confusion": 14
+      }
+    },
+    "medicine_dosage_confusions": 18,
+    "rare_type_errors": 172,
+    "spurious_predicted_spans": 1080,
+    "examples": [
+      {
+        "tokens": "আমি < name > । আমার বয়স 27 বছর । সাম্প্রতিক সময়ে আমি আমার শরীরে অস্বস্তি ভোগ করছি , সেই সাথে একাধারে মাটিতে বসে থাকলে মাজার দুই সাইড অবশ অনুভূত হয় , আবার পুরো শরীরে ক্লান্তি অনুভব হয় , একটু হাটলেই মনে হয় ক্লান্ত হয়ে গেছি , আগের থেকে শরীরের ওজন বৃদ্ধি পেয়েছে , পেটে প্রচুর গ্যাস্ট্রিকের সমস্যা , খাবার বেশি খেতে পারিনা প্রস্রাবের পরিমাণ অনেকটা কমে গেছে যেটুকু হয় হলুদ বর্ণের অতিরিক্ত গ্যাসে পেট ফুলে থাকে এবং প্রচুর বায়ু বের হয় এক্ষেত্রে আমার করনীয় কি বুঝে উঠতে পারছিনা একটু জানাবেন ধন্যবাদ",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমি < name > । আমার বয়স 27 বছর । সাম্প্রতিক সময়ে আমি আমার শরীরে অস্বস্তি ভোগ করছি , সেই সাথে একাধারে মাটিতে বসে থাকলে মাজার দুই সাইড অবশ অনুভূত হয় , আবার পুরো শরীরে ক্লান্তি অনুভব হয় , একটু হাটলেই মনে হয় ক্লান্ত হয়ে গেছি , আগের থেকে শরীরের ওজন বৃদ্ধি পেয়েছে , পেটে প্রচুর গ্যাস্ট্রিকের সমস্যা , খাবার বেশি খেতে পারিনা প্রস্রাবের পরিমাণ অনেকটা কমে গেছে যেটুকু হয় হলুদ বর্ণের অতিরিক্ত গ্যাসে পেট ফুলে থাকে এবং প্রচুর বায়ু বের হয় এক্ষেত্রে আমার করনীয় কি বুঝে উঠতে পারছিনা একটু জানাবেন ধন্যবাদ",
+        "gold_type": "Age",
+        "error_kind": "boundary_error",
+        "confused_with": "Age"
+      },
+      {
+        "tokens": "আমি < name > । আমার বয়স 27 বছর । সাম্প্রতিক সময়ে আমি আমার শরীরে অস্বস্তি ভোগ করছি , সেই সাথে একাধারে মাটিতে বসে থাকলে মাজার দুই সাইড অবশ অনুভূত হয় , আবার পুরো শরীরে ক্লান্তি অনুভব হয় , একটু হাটলেই মনে হয় ক্লান্ত হয়ে গেছি , আগের থেকে শরীরের ওজন বৃদ্ধি পেয়েছে , পেটে প্রচুর গ্যাস্ট্রিকের সমস্যা , খাবার বেশি খেতে পারিনা প্রস্রাবের পরিমাণ অনেকটা কমে গেছে যেটুকু হয় হলুদ বর্ণের অতিরিক্ত গ্যাসে পেট ফুলে থাকে এবং প্রচুর বায়ু বের হয় এক্ষেত্রে আমার করনীয় কি বুঝে উঠতে পারছিনা একটু জানাবেন ধন্যবাদ",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমি < name > । আমার বয়স 27 বছর । সাম্প্রতিক সময়ে আমি আমার শরীরে অস্বস্তি ভোগ করছি , সেই সাথে একাধারে মাটিতে বসে থাকলে মাজার দুই সাইড অবশ অনুভূত হয় , আবার পুরো শরীরে ক্লান্তি অনুভব হয় , একটু হাটলেই মনে হয় ক্লান্ত হয়ে গেছি , আগের থেকে শরীরের ওজন বৃদ্ধি পেয়েছে , পেটে প্রচুর গ্যাস্ট্রিকের সমস্যা , খাবার বেশি খেতে পারিনা প্রস্রাবের পরিমাণ অনেকটা কমে গেছে যেটুকু হয় হলুদ বর্ণের অতিরিক্ত গ্যাসে পেট ফুলে থাকে এবং প্রচুর বায়ু বের হয় এক্ষেত্রে আমার করনীয় কি বুঝে উঠতে পারছিনা একটু জানাবেন ধন্যবাদ",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আপনার প্রশ্নের জন্য ধন্যবাদ । দুশ্চিন্তা কমান , পর্যাপ্ত বিশ্রাম নিন । পানিশূন্যতা আছে শরীরে । আপনি তরল খাবার , স্যালাইন , তরমুজ , শসা , ডাবের পানি খাবেন । কোলেস্টেরল বাড়লে হার্ট এটাক , স্ট্রোকের ঝুঁকি বাড়ে । রোগীর সাথে সরাসরি কথা বলে হিস্ট্রি নিয়ে সমস্যা শুনে সমাধান দিতে হবে । বিশদ আলোচনার জন্য আপনি এই এপের মাধ্যমে ভিডিও কনফারেন্সে চিকিৎসকের পরামর্শ নিতে পারেন । ধন্যবাদ",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আপনার প্রশ্নের জন্য ধন্যবাদ । দুশ্চিন্তা কমান , পর্যাপ্ত বিশ্রাম নিন । পানিশূন্যতা আছে শরীরে । আপনি তরল খাবার , স্যালাইন , তরমুজ , শসা , ডাবের পানি খাবেন । কোলেস্টেরল বাড়লে হার্ট এটাক , স্ট্রোকের ঝুঁকি বাড়ে । রোগীর সাথে সরাসরি কথা বলে হিস্ট্রি নিয়ে সমস্যা শুনে সমাধান দিতে হবে । বিশদ আলোচনার জন্য আপনি এই এপের মাধ্যমে ভিডিও কনফারেন্সে চিকিৎসকের পরামর্শ নিতে পারেন । ধন্যবাদ",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "thank you for your question . your serum triglyceride is slightly raised than normal . you should do physical exercise regularly . you might need drug . to confirm this you need to visit a doctor with your reports . avoid fatty food , carbohydrate . thank you .",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "amar buke procur beta korteche , heart er doctors o dekhaichi . troponin i and s . creatinine porikka kore chi report valo . akn buker bam pashe veta korteche ki korbo jodi bolten . .",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আপনাকে ধন্যবাদ প্রশ্ন করার জন্য । হাত কাঁপার অন্যতম কারণ গুলোর মধ্যে থাইরয়েডের সমস্যা , দুশ্চিন্তা বা এনজাইটি ডিসঅর্ডার , ব্রেইনের সেরিবেলাম এর সমস্যা , পারকিনসন ডিজিজ ইত্যাদি উল্লেখযোগ্য । আপনার সমস্যা কি তা জানার জন্য কিছু পরীক্ষা করা দরকার যেমন থাইরয়েড পরীক্ষা । একজন নিউরোলজিস্ট দিয়ে আপনার ব্রেনের কোন সমস্যা হয়েছে কিনা তা জানা দরকার । আপনি একজন নিউরোমেডিসিন বিশেষজ্ঞ কে দেখান । দুশ্চিন্তা করবেন না । চিন্তা করলে হাত কাঁপা বাড়তে পারে ঘুম ঠিকমতো হতে হবে । ধন্যবাদ ।",
+        "gold_type": "Health Condition",
+        "error_kind": "boundary_error",
+        "confused_with": "Health Condition"
+      },
+      {
+        "tokens": "আমার বয়স ৪১ , উচ্চতা ৫ - ৬ \" \" , ওজন ৭০ প্রায় ২ / ৩ বছর যাবৎ পায়ের গোড়ালি তে ব্যথা হয় । দুই পায়েই হয় তবে ডান পায়ে বেশি । হাটাহাটি বেশি করলে ঘুম থেকে ওঠার পরে হাটতে খুব কস্ট হয় । ১ / ২ মিনিট হাটলে আস্তে আস্তে কমে কিন্ত সারাদিনই ব্যথা থেকেই যায় । আমি তেমন কোন ঔষধ খায় নাই এজন্য । অনুগ্রহ করে আমাকে সহযোগিতা করবেন ধন্যবাদ ।",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার বয়স ৪১ , উচ্চতা ৫ - ৬ \" \" , ওজন ৭০ প্রায় ২ / ৩ বছর যাবৎ পায়ের গোড়ালি তে ব্যথা হয় । দুই পায়েই হয় তবে ডান পায়ে বেশি । হাটাহাটি বেশি করলে ঘুম থেকে ওঠার পরে হাটতে খুব কস্ট হয় । ১ / ২ মিনিট হাটলে আস্তে আস্তে কমে কিন্ত সারাদিনই ব্যথা থেকেই যায় । আমি তেমন কোন ঔষধ খায় নাই এজন্য । অনুগ্রহ করে আমাকে সহযোগিতা করবেন ধন্যবাদ ।",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার বয়স ৪১ , উচ্চতা ৫ - ৬ \" \" , ওজন ৭০ প্রায় ২ / ৩ বছর যাবৎ পায়ের গোড়ালি তে ব্যথা হয় । দুই পায়েই হয় তবে ডান পায়ে বেশি । হাটাহাটি বেশি করলে ঘুম থেকে ওঠার পরে হাটতে খুব কস্ট হয় । ১ / ২ মিনিট হাটলে আস্তে আস্তে কমে কিন্ত সারাদিনই ব্যথা থেকেই যায় । আমি তেমন কোন ঔষধ খায় নাই এজন্য । অনুগ্রহ করে আমাকে সহযোগিতা করবেন ধন্যবাদ ।",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "total cholesterol 200 mg / dl serum triglycerides 553 mg / dl hdl cholesterol 25 mg / dl ldl cholesterol 93 mg / dl how to lower triglycerides ? am i prone to heart disease ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "total cholesterol 200 mg / dl serum triglycerides 553 mg / dl hdl cholesterol 25 mg / dl ldl cholesterol 93 mg / dl how to lower triglycerides ? am i prone to heart disease ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "total cholesterol 200 mg / dl serum triglycerides 553 mg / dl hdl cholesterol 25 mg / dl ldl cholesterol 93 mg / dl how to lower triglycerides ? am i prone to heart disease ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "total cholesterol 200 mg / dl serum triglycerides 553 mg / dl hdl cholesterol 25 mg / dl ldl cholesterol 93 mg / dl how to lower triglycerides ? am i prone to heart disease ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "my mother is 65 years old . i have diabetes , pressure , gas , thyroid problems . can i get the corona vaccine ?",
+        "gold_type": "Age",
+        "error_kind": "boundary_error",
+        "confused_with": "Age"
+      },
+      {
+        "tokens": "for the last 4 months , my left hand ' s ring finger seems to be fragile . a little bit pain in the joints of the finger is present . and when i take an object ( such as book , file etc . ) i feet the ringfinger is going to break by the weight / pressure of the thing . recently the ring finger of my right hand seems to have the same problem . today , my left hand ' s thumb also seems to catch same problem . so far of my knowledge , it is likely to be osteoporosis . now i seek your valuable treatment plan of this . please advise me thereby .",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "for the last 4 months , my left hand ' s ring finger seems to be fragile . a little bit pain in the joints of the finger is present . and when i take an object ( such as book , file etc . ) i feet the ringfinger is going to break by the weight / pressure of the thing . recently the ring finger of my right hand seems to have the same problem . today , my left hand ' s thumb also seems to catch same problem . so far of my knowledge , it is likely to be osteoporosis . now i seek your valuable treatment plan of this . please advise me thereby .",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "হা করতে গেলে বাম পাশের চোয়ালে ভেতরের দিকে ব্যথা করছে , ঢোক গিললে কোন ব্যাথা নেই ৷ বাম পাশের চোয়াল আর কানের দিকে বাইরের দিকে হাল্কা ফুলে আছে ৷ গলার ভেতর লাইট দিয়ে দেখলে কোন ফুলা কিছু দেখা যাচ্ছে না ৷ কি মেডিসিন খাব ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "হা করতে গেলে বাম পাশের চোয়ালে ভেতরের দিকে ব্যথা করছে , ঢোক গিললে কোন ব্যাথা নেই ৷ বাম পাশের চোয়াল আর কানের দিকে বাইরের দিকে হাল্কা ফুলে আছে ৷ গলার ভেতর লাইট দিয়ে দেখলে কোন ফুলা কিছু দেখা যাচ্ছে না ৷ কি মেডিসিন খাব ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "হা করতে গেলে বাম পাশের চোয়ালে ভেতরের দিকে ব্যথা করছে , ঢোক গিললে কোন ব্যাথা নেই ৷ বাম পাশের চোয়াল আর কানের দিকে বাইরের দিকে হাল্কা ফুলে আছে ৷ গলার ভেতর লাইট দিয়ে দেখলে কোন ফুলা কিছু দেখা যাচ্ছে না ৷ কি মেডিসিন খাব ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার স্ত্রী বয়স ২৪ ও ১৪ দিনের প্রেগন্যান্ট অবস্থা mm kit খায় ২৫ তারিখে এন্ড , ঐ দিন মাসিক হয় , কিন্তু আজ দু দিন যাবত bleeding আনে বেশি যাচ্ছে , তাই আমি আল্টাস্রোফ্রাগি করাতে চাই , দয়া করে আমাকে পরিক্ষার নাম টা লিখে দিবেন",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার স্ত্রী বয়স ২৪ ও ১৪ দিনের প্রেগন্যান্ট অবস্থা mm kit খায় ২৫ তারিখে এন্ড , ঐ দিন মাসিক হয় , কিন্তু আজ দু দিন যাবত bleeding আনে বেশি যাচ্ছে , তাই আমি আল্টাস্রোফ্রাগি করাতে চাই , দয়া করে আমাকে পরিক্ষার নাম টা লিখে দিবেন",
+        "gold_type": "Medicine",
+        "error_kind": "type_confusion",
+        "confused_with": "Medical Procedure"
+      },
+      {
+        "tokens": "আমার স্ত্রী বয়স ২৪ ও ১৪ দিনের প্রেগন্যান্ট অবস্থা mm kit খায় ২৫ তারিখে এন্ড , ঐ দিন মাসিক হয় , কিন্তু আজ দু দিন যাবত bleeding আনে বেশি যাচ্ছে , তাই আমি আল্টাস্রোফ্রাগি করাতে চাই , দয়া করে আমাকে পরিক্ষার নাম টা লিখে দিবেন",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার ডান পায়ে রানের উপরে বলটার সোজা পিছনে পাচার দুই অংশের ডান পাশে 20 - 25 দিন যাবত প্রচন্ড ব্যাথা অনুভব করতেছি ওষুধ খেয়েও কোনো কাজ হচ্ছেনা ব্যথার আবার যখন শুয়ে থাকি তখন ব্যথাটা কম অনুভব হয় । আবার যখন বিছানা থেকে দাঁড়ায় থাকি তখন ব্যাথা বেশি অনুভব হয । যেসব ওষুধ খেয়েছি সেসব ওষুধের নাম 1 . tolpa 50 2 . etorix 90 3 . tryptin 10 4 . esolox 20 5 . neurep",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার ডান পায়ে রানের উপরে বলটার সোজা পিছনে পাচার দুই অংশের ডান পাশে 20 - 25 দিন যাবত প্রচন্ড ব্যাথা অনুভব করতেছি ওষুধ খেয়েও কোনো কাজ হচ্ছেনা ব্যথার আবার যখন শুয়ে থাকি তখন ব্যথাটা কম অনুভব হয় । আবার যখন বিছানা থেকে দাঁড়ায় থাকি তখন ব্যাথা বেশি অনুভব হয । যেসব ওষুধ খেয়েছি সেসব ওষুধের নাম 1 . tolpa 50 2 . etorix 90 3 . tryptin 10 4 . esolox 20 5 . neurep",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার ডান পায়ে রানের উপরে বলটার সোজা পিছনে পাচার দুই অংশের ডান পাশে 20 - 25 দিন যাবত প্রচন্ড ব্যাথা অনুভব করতেছি ওষুধ খেয়েও কোনো কাজ হচ্ছেনা ব্যথার আবার যখন শুয়ে থাকি তখন ব্যথাটা কম অনুভব হয় । আবার যখন বিছানা থেকে দাঁড়ায় থাকি তখন ব্যাথা বেশি অনুভব হয । যেসব ওষুধ খেয়েছি সেসব ওষুধের নাম 1 . tolpa 50 2 . etorix 90 3 . tryptin 10 4 . esolox 20 5 . neurep",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার ডান পায়ে রানের উপরে বলটার সোজা পিছনে পাচার দুই অংশের ডান পাশে 20 - 25 দিন যাবত প্রচন্ড ব্যাথা অনুভব করতেছি ওষুধ খেয়েও কোনো কাজ হচ্ছেনা ব্যথার আবার যখন শুয়ে থাকি তখন ব্যথাটা কম অনুভব হয় । আবার যখন বিছানা থেকে দাঁড়ায় থাকি তখন ব্যাথা বেশি অনুভব হয । যেসব ওষুধ খেয়েছি সেসব ওষুধের নাম 1 . tolpa 50 2 . etorix 90 3 . tryptin 10 4 . esolox 20 5 . neurep",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "ধন্যবাদ আপনার প্রশ্নের জন্য । ফাটিয়ে দিবেন না । ইনফেকশন হয়ে যাবে । আপাতত এলারজি উদ্রেককারী খাবার , ধূলাবালি এড়িয়ে চলুন । । এলাট্রল খান । না দেখে সমাধান দেয়া যাচ্ছে না । সরাসরি চর্মরোগ বিশেষজ্ঞ দেখিয়ে পরামর্শ নিতে হবে ধন্যবাদ",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার মেয়ের বয়স ৮ মাস মেয়ের পায়খানা অনেক কষা হয়ে গেছে টয়লেট করতে অনেক সময় লাগে এখন মেয়েকে কি খাওয়ালে নরমাল টয়লেট করবে",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "tab zinc 1 + 0 + 1 and tab ceevit 1 + 0 + 1 for 15 days . tab multivit 0 + 1 + 0 for 1 month",
+        "gold_type": "Medicine",
+        "error_kind": "type_confusion",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "tab zinc 1 + 0 + 1 and tab ceevit 1 + 0 + 1 for 15 days . tab multivit 0 + 1 + 0 for 1 month",
+        "gold_type": "Medicine",
+        "error_kind": "type_confusion",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "tab zinc 1 + 0 + 1 and tab ceevit 1 + 0 + 1 for 15 days . tab multivit 0 + 1 + 0 for 1 month",
+        "gold_type": "Medicine",
+        "error_kind": "type_confusion",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "thank you for asking question to daktarbhai . pls consult a skin specialist doctor physically . thank you .",
+        "gold_type": "Specialist",
+        "error_kind": "boundary_error",
+        "confused_with": "Specialist"
+      },
+      {
+        "tokens": "আমার দুদিন যাবত জ্বর সাথে কোন কিছু বলতে গেলে গলায় ধারানি হয়ে শুকনো কাশ হয় আমি রাতে হিস্টাসিন ও প্যারাসিটামল খেয়েছি কিন্তু তাতে কোন লাভ হয়নি জ্বর ১০০ নিচে আছে ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার দুদিন যাবত জ্বর সাথে কোন কিছু বলতে গেলে গলায় ধারানি হয়ে শুকনো কাশ হয় আমি রাতে হিস্টাসিন ও প্যারাসিটামল খেয়েছি কিন্তু তাতে কোন লাভ হয়নি জ্বর ১০০ নিচে আছে ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "প্রতিদিনই ঘুম ঠিকমতো হয়না দুই তিন ঘন্টা পর চলে যায় পেইস ০ . ৫ ও filfresh 3mg খেয়েদেখছি অনেকদিন কাজ হচ্ছে । মানষিক দুঃচিন্তায় কমেনা তার উপর ঠিকমত ঘুম না হওয়ায় ডিপ্রেশনে ভুগছি । উচ্চ রক্তচাপের রুগি নিয়মিত ঔষধ খাই ।",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "প্রতিদিনই ঘুম ঠিকমতো হয়না দুই তিন ঘন্টা পর চলে যায় পেইস ০ . ৫ ও filfresh 3mg খেয়েদেখছি অনেকদিন কাজ হচ্ছে । মানষিক দুঃচিন্তায় কমেনা তার উপর ঠিকমত ঘুম না হওয়ায় ডিপ্রেশনে ভুগছি । উচ্চ রক্তচাপের রুগি নিয়মিত ঔষধ খাই ।",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "প্রতিদিনই ঘুম ঠিকমতো হয়না দুই তিন ঘন্টা পর চলে যায় পেইস ০ . ৫ ও filfresh 3mg খেয়েদেখছি অনেকদিন কাজ হচ্ছে । মানষিক দুঃচিন্তায় কমেনা তার উপর ঠিকমত ঘুম না হওয়ায় ডিপ্রেশনে ভুগছি । উচ্চ রক্তচাপের রুগি নিয়মিত ঔষধ খাই ।",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার বাচ্চার বয়স ৬ মাস । সিজারে হয়েছে । এখন আমার স্ত্রীর ২ মাস যাবত পিরিয়ড হয়নি , আজকে টেষ্ট করল পজিটিভ আসছে । এখন আসলে কি করব বুঝে উঠতে পারছিনা । একটা পরামর্শ চাচ্ছিলাম ।",
+        "gold_type": "Age",
+        "error_kind": "boundary_error",
+        "confused_with": "Age"
+      },
+      {
+        "tokens": "আমার বাচ্চার বয়স ৬ মাস । সিজারে হয়েছে । এখন আমার স্ত্রীর ২ মাস যাবত পিরিয়ড হয়নি , আজকে টেষ্ট করল পজিটিভ আসছে । এখন আসলে কি করব বুঝে উঠতে পারছিনা । একটা পরামর্শ চাচ্ছিলাম ।",
+        "gold_type": "Health Condition",
+        "error_kind": "type_confusion",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার আম্মুর পিঠের ঠিক মাঝে ভীষণ জ্বলে প্রায় এক বসর ধরে এমন হয় । ডাক্তার দেখানো হয়েছে শুধু গ্যাস্ট্রিকের ওষুধ দেয় । কিন্তু কোন কাজ হয়না । এখন খুব জ্বলে । মাঝে মাঝে একটু কম থাকে । কোন বিশেষজ্ঞ দেখালে ভাল হয় ? আর কি সমস্যা হতে পারে ? বিশেষজ্ঞদের পরামর্শ চাই ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার আম্মুর পিঠের ঠিক মাঝে ভীষণ জ্বলে প্রায় এক বসর ধরে এমন হয় । ডাক্তার দেখানো হয়েছে শুধু গ্যাস্ট্রিকের ওষুধ দেয় । কিন্তু কোন কাজ হয়না । এখন খুব জ্বলে । মাঝে মাঝে একটু কম থাকে । কোন বিশেষজ্ঞ দেখালে ভাল হয় ? আর কি সমস্যা হতে পারে ? বিশেষজ্ঞদের পরামর্শ চাই ।",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "তিন মাস যাবত মাসিক হচ্ছে না । গত দুই দিন আগে এক ধরনের হলুদ ভাব আসছে কিন্তু রক্ত বের হয় নাই । সেই সাথে সাদা স্রাব বের হচ্ছে । এখন কি করণীয় ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "তিন মাস যাবত মাসিক হচ্ছে না । গত দুই দিন আগে এক ধরনের হলুদ ভাব আসছে কিন্তু রক্ত বের হয় নাই । সেই সাথে সাদা স্রাব বের হচ্ছে । এখন কি করণীয় ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার বাচ্চার বয়স ২১ দিন ওর শরীরে হালকা গামাছির মত দেখা যায় । বেবি পাউডার দিয়েছে কোন সমস্যা হবে কি ? আর বুকের দুধ কম পেলে দোকানের কোন দুধ খেতে পরবে কি না ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "স্যার , আমার ছেলের বয়স ৯ বছর ১ মাস , খাবার কোন রুচি নাই , সারা দিনে ১ বার খায় । আবার মাঝে মাঝে পেট ব্যাথা করে ডান সাইটে । আর সব সময় মন ভার করে থাকে , দিন দিন ছেলে শুখিয়ে যাচ্ছে ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "স্যার , আমার ছেলের বয়স ৯ বছর ১ মাস , খাবার কোন রুচি নাই , সারা দিনে ১ বার খায় । আবার মাঝে মাঝে পেট ব্যাথা করে ডান সাইটে । আর সব সময় মন ভার করে থাকে , দিন দিন ছেলে শুখিয়ে যাচ্ছে ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "স্যার , আমার ছেলের বয়স ৯ বছর ১ মাস , খাবার কোন রুচি নাই , সারা দিনে ১ বার খায় । আবার মাঝে মাঝে পেট ব্যাথা করে ডান সাইটে । আর সব সময় মন ভার করে থাকে , দিন দিন ছেলে শুখিয়ে যাচ্ছে ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "স্যার , আমার ছেলের বয়স ৯ বছর ১ মাস , খাবার কোন রুচি নাই , সারা দিনে ১ বার খায় । আবার মাঝে মাঝে পেট ব্যাথা করে ডান সাইটে । আর সব সময় মন ভার করে থাকে , দিন দিন ছেলে শুখিয়ে যাচ্ছে ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আপনাকে ধন্যবাদ প্রশ্ন করার জন্য । প্রাথমিক ভাবে গ্লিসারিন সাপজিটরি তিন টা পায়খানার রাস্তায় ব্যবহার করুন । এই ধরনের রোগীদের এমনিতেই কম পায়খানা হয় । কারন তাদের হাঁটাচলা কম হয় । সুপ , জাউ খাবারের পায়খানা শক্ত হয় । খাবারের সাথে পর্যাপ্ত পানি খেতে হবে । ইসুপগুলের ভুষি , ফাইবার জাতীয় খাবার শাক সবজি খেতে হবে । দুধ খেতে হবে । প্রয়োজন এ কক্সবাজার এ একজন ডাক্তার কে দেখিয়ে নিতে পারেন । ধন্যবাদ ।",
+        "gold_type": "Medicine",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আপনাকে ধন্যবাদ প্রশ্ন করার জন্য । প্রাথমিক ভাবে গ্লিসারিন সাপজিটরি তিন টা পায়খানার রাস্তায় ব্যবহার করুন । এই ধরনের রোগীদের এমনিতেই কম পায়খানা হয় । কারন তাদের হাঁটাচলা কম হয় । সুপ , জাউ খাবারের পায়খানা শক্ত হয় । খাবারের সাথে পর্যাপ্ত পানি খেতে হবে । ইসুপগুলের ভুষি , ফাইবার জাতীয় খাবার শাক সবজি খেতে হবে । দুধ খেতে হবে । প্রয়োজন এ কক্সবাজার এ একজন ডাক্তার কে দেখিয়ে নিতে পারেন । ধন্যবাদ ।",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "আপনাকে ধন্যবাদ প্রশ্ন করার জন্য । এক বছর ধরে সর্দি , কাশি না আপনি তারিখ ভুল করছেন , বোঝা যাচ্ছে না । আপনার মাথা ঘুড়ানোর অন্য কোনো কারন থাকতে পারে । কানে কম শুনলে বা কানে ইনফেকশনের জন্য মাথা ঘুড়তে পারে । একজন ভাল নাক কান গলা ডাক্তার কে দেখিয়ে পরামর্শ নিন । আপনাকে একজন নিউরো মেডিসিন ডাক্তারো দেখাতে হতে পারে । ধন্যবাদ",
+        "gold_type": "Specialist",
+        "error_kind": "boundary_error",
+        "confused_with": "Specialist"
+      },
+      {
+        "tokens": "পেটে ব্যাথা । সকাল থেকে সন্ধ্যা পর্যন্ত 15 বার প্রসাব হয়েছে । শরীর খারাপ লাগছে । ডাক্তার এর পরামর্শ চাই ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আসসালামু আলাইকুম , আমার সমস্যা হচ্ছে আমি খুবই চিকন । বলতে গেলে রোগা । কিন্তু আমার বয়স ২৬ বছর । আমি আমার খারাপ স্বাস্থ্যের জন্য খুবই চিন্তিত থাকি । এখন কি করলে আমি সুস্বাস্থ্য ফিরে পেতে পারি ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "ডাক্তার ভাই কে প্রশ্ন করার জন্য ধন্যবাদ এই অবস্হায় সরাসরি না দেখে এবং পরীক্ষা না করে কিছু বলা ঠিক হবেনা আপনি একজন medicine speacialist এর পরামর্শ নিন ধন্যবাদ",
+        "gold_type": "Medical Procedure",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "পিরিয়ড কে ডিলে করার জন্য পিল খেয়েছিলাম । মার্চ মাস ২০১৯ সনে খেয়েছিলাম । এর পর থেকে আমার প্রতি মাসে পিরিয়ড না হয়ে ২ মাস পর পর হচ্ছে । ১ বছর যাবত এইরকম সমস্যা ছিল । হঠাত ২ মাস টানা পিরিয়ড হওয়ার পর আবার আগের অবস্থায় ফিরে গেছে । এখন ২ মাস হয়ে গেলো প্রায় পিরিয়ড হচ্ছে না এখনও । আমার বয়স ২৩ বছর , ওজন ৫৮ কেজি । এমতাবস্থায় আমার কি করা উচিত ? এখন করোনার জন্য কোথায় যাবো কোন ডাক্টারকে দেখাবো সেটাও সম্ভব হচ্ছে না । - on behalf of my wife",
+        "gold_type": "Age",
+        "error_kind": "boundary_error",
+        "confused_with": "Age"
+      },
+      {
+        "tokens": "পিরিয়ড কে ডিলে করার জন্য পিল খেয়েছিলাম । মার্চ মাস ২০১৯ সনে খেয়েছিলাম । এর পর থেকে আমার প্রতি মাসে পিরিয়ড না হয়ে ২ মাস পর পর হচ্ছে । ১ বছর যাবত এইরকম সমস্যা ছিল । হঠাত ২ মাস টানা পিরিয়ড হওয়ার পর আবার আগের অবস্থায় ফিরে গেছে । এখন ২ মাস হয়ে গেলো প্রায় পিরিয়ড হচ্ছে না এখনও । আমার বয়স ২৩ বছর , ওজন ৫৮ কেজি । এমতাবস্থায় আমার কি করা উচিত ? এখন করোনার জন্য কোথায় যাবো কোন ডাক্টারকে দেখাবো সেটাও সম্ভব হচ্ছে না । - on behalf of my wife",
+        "gold_type": "Health Condition",
+        "error_kind": "type_confusion",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "পিরিয়ড কে ডিলে করার জন্য পিল খেয়েছিলাম । মার্চ মাস ২০১৯ সনে খেয়েছিলাম । এর পর থেকে আমার প্রতি মাসে পিরিয়ড না হয়ে ২ মাস পর পর হচ্ছে । ১ বছর যাবত এইরকম সমস্যা ছিল । হঠাত ২ মাস টানা পিরিয়ড হওয়ার পর আবার আগের অবস্থায় ফিরে গেছে । এখন ২ মাস হয়ে গেলো প্রায় পিরিয়ড হচ্ছে না এখনও । আমার বয়স ২৩ বছর , ওজন ৫৮ কেজি । এমতাবস্থায় আমার কি করা উচিত ? এখন করোনার জন্য কোথায় যাবো কোন ডাক্টারকে দেখাবো সেটাও সম্ভব হচ্ছে না । - on behalf of my wife",
+        "gold_type": "Health Condition",
+        "error_kind": "type_confusion",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "পিরিয়ড কে ডিলে করার জন্য পিল খেয়েছিলাম । মার্চ মাস ২০১৯ সনে খেয়েছিলাম । এর পর থেকে আমার প্রতি মাসে পিরিয়ড না হয়ে ২ মাস পর পর হচ্ছে । ১ বছর যাবত এইরকম সমস্যা ছিল । হঠাত ২ মাস টানা পিরিয়ড হওয়ার পর আবার আগের অবস্থায় ফিরে গেছে । এখন ২ মাস হয়ে গেলো প্রায় পিরিয়ড হচ্ছে না এখনও । আমার বয়স ২৩ বছর , ওজন ৫৮ কেজি । এমতাবস্থায় আমার কি করা উচিত ? এখন করোনার জন্য কোথায় যাবো কোন ডাক্টারকে দেখাবো সেটাও সম্ভব হচ্ছে না । - on behalf of my wife",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "পিরিয়ড কে ডিলে করার জন্য পিল খেয়েছিলাম । মার্চ মাস ২০১৯ সনে খেয়েছিলাম । এর পর থেকে আমার প্রতি মাসে পিরিয়ড না হয়ে ২ মাস পর পর হচ্ছে । ১ বছর যাবত এইরকম সমস্যা ছিল । হঠাত ২ মাস টানা পিরিয়ড হওয়ার পর আবার আগের অবস্থায় ফিরে গেছে । এখন ২ মাস হয়ে গেলো প্রায় পিরিয়ড হচ্ছে না এখনও । আমার বয়স ২৩ বছর , ওজন ৫৮ কেজি । এমতাবস্থায় আমার কি করা উচিত ? এখন করোনার জন্য কোথায় যাবো কোন ডাক্টারকে দেখাবো সেটাও সম্ভব হচ্ছে না । - on behalf of my wife",
+        "gold_type": "Health Condition",
+        "error_kind": "type_confusion",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার মারি গোরার বুছ জমছে আমি কি করতে পারি এবং দাঁত বেতা করে",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "গত তিন দিন যাবত আমার মা এর জ্বর , , , এ জ্বরটা রাতে বেশি হয় , , , দিনে জ্বরটা বোঝা যায়না , , , কিন্তু ভেতরে ভেতরে অনুভব করতে পারে , , , , রাতে জ্বর আসলে জ্বরের মাত্রা ১০১ + হয়ে থাকে , , , , আমার মায়ের বয়স আনুমানিক ৪০ + আর হ্যা জ্বরের সাথে , হাত - পায়ের গিরা ব্যাথা করে এবং জ্বিম জ্বিম করে , , , এ খেত্রে কি করব ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "গত তিন দিন যাবত আমার মা এর জ্বর , , , এ জ্বরটা রাতে বেশি হয় , , , দিনে জ্বরটা বোঝা যায়না , , , কিন্তু ভেতরে ভেতরে অনুভব করতে পারে , , , , রাতে জ্বর আসলে জ্বরের মাত্রা ১০১ + হয়ে থাকে , , , , আমার মায়ের বয়স আনুমানিক ৪০ + আর হ্যা জ্বরের সাথে , হাত - পায়ের গিরা ব্যাথা করে এবং জ্বিম জ্বিম করে , , , এ খেত্রে কি করব ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "গত তিন দিন যাবত আমার মা এর জ্বর , , , এ জ্বরটা রাতে বেশি হয় , , , দিনে জ্বরটা বোঝা যায়না , , , কিন্তু ভেতরে ভেতরে অনুভব করতে পারে , , , , রাতে জ্বর আসলে জ্বরের মাত্রা ১০১ + হয়ে থাকে , , , , আমার মায়ের বয়স আনুমানিক ৪০ + আর হ্যা জ্বরের সাথে , হাত - পায়ের গিরা ব্যাথা করে এবং জ্বিম জ্বিম করে , , , এ খেত্রে কি করব ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "গত তিন দিন যাবত আমার মা এর জ্বর , , , এ জ্বরটা রাতে বেশি হয় , , , দিনে জ্বরটা বোঝা যায়না , , , কিন্তু ভেতরে ভেতরে অনুভব করতে পারে , , , , রাতে জ্বর আসলে জ্বরের মাত্রা ১০১ + হয়ে থাকে , , , , আমার মায়ের বয়স আনুমানিক ৪০ + আর হ্যা জ্বরের সাথে , হাত - পায়ের গিরা ব্যাথা করে এবং জ্বিম জ্বিম করে , , , এ খেত্রে কি করব ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "amr allergy hoyeche jeikhane allergy hoyeche ekdom chulkiye obsta kharap hoye gese . . . toilet er rastar 2 pase hoise eita shudhu barche . . ki krle vlo hobe janaben plz",
+        "gold_type": "Symptom",
+        "error_kind": "type_confusion",
+        "confused_with": "Health Condition"
+      },
+      {
+        "tokens": "thank you for your question bukof syrup 3times a day for 3days . tab . fexo 120mg 0 + 0 + 1 for 3days . if not cured antibiotic will be required . thank you",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "দিন দিন শরীরটা ভারি হয়ে যাচ্ছে এজন্য কি করব",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "ওটস খাচ্ছি দুধ দিয়ে রোজ সকালে ৩০ গ্রাম করে । কিন্ত মনে হচ্ছে হাটু আর পায়ের হারিয়ে দুর্বলতা অনুভব করবি । এর কারন কি ? ওজন ৬০ কেজি উচ্চতা ৫ . ৯ \"",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "ওটস খাচ্ছি দুধ দিয়ে রোজ সকালে ৩০ গ্রাম করে । কিন্ত মনে হচ্ছে হাটু আর পায়ের হারিয়ে দুর্বলতা অনুভব করবি । এর কারন কি ? ওজন ৬০ কেজি উচ্চতা ৫ . ৯ \"",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "৪ দিন যাবৎ টয়লেট হচ্ছে না । বেগ হয় , টয়লেট বসলে খুবই অল্প পরিমানে হচ্ছে . . উল্লেখঃ ২ মাসের প্রেগনেন্সি । পরামর্শ দিন প্লিজ ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "৪ দিন যাবৎ টয়লেট হচ্ছে না । বেগ হয় , টয়লেট বসলে খুবই অল্প পরিমানে হচ্ছে . . উল্লেখঃ ২ মাসের প্রেগনেন্সি । পরামর্শ দিন প্লিজ ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "৪ দিন যাবৎ টয়লেট হচ্ছে না । বেগ হয় , টয়লেট বসলে খুবই অল্প পরিমানে হচ্ছে . . উল্লেখঃ ২ মাসের প্রেগনেন্সি । পরামর্শ দিন প্লিজ ।",
+        "gold_type": "Health Condition",
+        "error_kind": "boundary_error",
+        "confused_with": "Health Condition"
+      },
+      {
+        "tokens": "১ ) ডায়াবেটিস ২৪ . ৬ ২ ) দিনে এবং রাতে ঘুম আসেই না ৩ ) মাঝে মাঝে পিঠে ব্যাথা উঠে",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "১ ) ডায়াবেটিস ২৪ . ৬ ২ ) দিনে এবং রাতে ঘুম আসেই না ৩ ) মাঝে মাঝে পিঠে ব্যাথা উঠে",
+        "gold_type": "Health Condition",
+        "error_kind": "boundary_error",
+        "confused_with": "Health Condition"
+      },
+      {
+        "tokens": "আমার বুকের উপর পিঠে গুরি টোরা অনেক দিন ধরে এখন কি করা যায় জানতে পারি ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "ওজন বাড়ানোর জন্য কোন মাল্টিভিটামিন খেলে ভালো ফল পাওয়া যাবে ।",
+        "gold_type": "Dosage",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আপনাকে ধন্যবাদ প্রশ্ন করার জন্য । যেহেতু ব্যাথানাশক ঔষধ খেয়েও ব্যাথা কমেনি , সমস্যাটি গুরুতর । একজন অর্থোপেডিক্স বিশেষজ্ঞের সাথে সরাসরি দেখা করে পরামর্শ নিন । গরম শেক দিন । ধন্যবাদ ।",
+        "gold_type": "Specialist",
+        "error_kind": "boundary_error",
+        "confused_with": "Specialist"
+      },
+      {
+        "tokens": "আমি অনেক দিন যাবত গলার মদ্ধ্যে সাদা সাদা কফ জাতীয় কিছু অনুভব করছি । অনেক ডাক্তার দেখায়ছি তারা বলছে গ্যাস্ট্রিক এর সমস্যা । গ্যাস্ট্রিক ওষুধ খেতে খেতে আমার আলসার এর সমস্যা হয়ে গেছে । এটা আমার সাথে ৫ বৎসর যাবত চলছে , আপনারা পরামর্শ দিলে উপক্রিত হব ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার মিসেস গর্ভবতি থাকা অবস্থায় সারা গায়ে অসংখ্য কালো কালো দাগ হয়েছিলো । এখন আমার বাচ্চার বয়স ৬ মাস কিন্তু দাগগুলো আগের মতোই আছে । কি করবো পরামর্শ দিতে মজি হয় ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "fever for 4 days between 101 to 103 degree continuously with no other symptom . .",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "করোলা ভাইরাস সংক্রমণের থেকে বাচার আমাদের কোরো নিয় কি ? আমাদের একটু বলেদেন ।",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "বাবুর খুব পাতলা পায়খানা হচ্ছে । ফিলমেট আর পেপ 2 দিচ্ছে কিন্তু ফিলমেট তিতা জন্য খেতেই পারছে না , খাইলেও বুমি করে দিচ্ছে । কি করবো এখন",
+        "gold_type": "Medicine",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "বাবুর খুব পাতলা পায়খানা হচ্ছে । ফিলমেট আর পেপ 2 দিচ্ছে কিন্তু ফিলমেট তিতা জন্য খেতেই পারছে না , খাইলেও বুমি করে দিচ্ছে । কি করবো এখন",
+        "gold_type": "Medicine",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "ডাক্তার ভাইতে প্রশ্ন করার জন্যে আপনাকে ধন্যবাদ । প্রথমত আপনাকে খাবার খেতে হবে ঠিকমতো । tab - filwel gold 0 + 1 + 0 ১ মাস এই মাল্টিভিটামিন খেতে পারেন । tab - ovocal d 1 + 0 + 0 ১ মাস খাবেন । একজন গাইনি বিশেষজ্ঞ চিকিৎসক এর পরামর্শ নিবেন ।",
+        "gold_type": "Specialist",
+        "error_kind": "boundary_error",
+        "confused_with": "Specialist"
+      },
+      {
+        "tokens": "আমার বাচ্চার বয়স ১৮মাস । তার ছৌদ হয়েছে কি ঔষধ খাওযাবো জানাবেন",
+        "gold_type": "Health Condition",
+        "error_kind": "boundary_error",
+        "confused_with": "Health Condition"
+      },
+      {
+        "tokens": "বাসে বুমি হয় কি করবো ? বয়স ৪ / প্রস্রব ঘাঢ় হুলদ হয় কেন ? ঠান্ডার সমস্যা আছে ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "loosing hair gradually for 6 months i ' m a nocturnal type could you please suggest me some medicines or shampoo to control the hair fall ? thanks in advance",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "ডাক্তার ভাইতে প্রশ্ন করার জন্যে আপনাকে ধন্যবাদ । এটি দূর্বলতা কমায় , চুল পরা কমানো সহ বিভিন্ন জটিলতায় কাজ করে । পরামর্শ ছাড়া খাওয়া যাবেনা ।",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "ডাক্তার ভাইতে প্রশ্ন করার জন্যে আপনাকে ধন্যবাদ । এটি দূর্বলতা কমায় , চুল পরা কমানো সহ বিভিন্ন জটিলতায় কাজ করে । পরামর্শ ছাড়া খাওয়া যাবেনা ।",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "রাতে ঘূম কম হওয়া মাথা গরম হয়ে থাকে চুল পরে যায়",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার সব সময় মাথা এলোমোলো আর অস্থিতিকর লাগে , স্বাভাভিক ভাবে থাকতে পারতেছিনা মানুষিক চাপ টেনশন আছে , বদহজম এর সমস্যা , সাথে হাই প্রেসার ও আছে অনেক ডাক্তার পরিক্ষা নিরিক্ষা করে ঔষধ খাচ্ছি olmezest am 5 / 20 , ribotril 0 . 5 mg , rabe 20 mg , apuldon 10 mg , এগুলান খেয়ে কিছুটা স্বাভাবিক থাকলেও পুরো স্বাভাবিক থাকতে পারতেছিনা , স্বাস্থ্য ও খারাপ , আপনাদের কাছে এসব এর প্রতিকার জানতে চাইলে আপনারা প্রতিবারেই একই উত্তর যাচ্ছেন সাধারণ ডাক্তার এর মত , তাহলে এই সেবা টা চালু করার দরকার ছিলো না , এখন আমাকে কিছু পরামর্শ দেন",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার সব সময় মাথা এলোমোলো আর অস্থিতিকর লাগে , স্বাভাভিক ভাবে থাকতে পারতেছিনা মানুষিক চাপ টেনশন আছে , বদহজম এর সমস্যা , সাথে হাই প্রেসার ও আছে অনেক ডাক্তার পরিক্ষা নিরিক্ষা করে ঔষধ খাচ্ছি olmezest am 5 / 20 , ribotril 0 . 5 mg , rabe 20 mg , apuldon 10 mg , এগুলান খেয়ে কিছুটা স্বাভাবিক থাকলেও পুরো স্বাভাবিক থাকতে পারতেছিনা , স্বাস্থ্য ও খারাপ , আপনাদের কাছে এসব এর প্রতিকার জানতে চাইলে আপনারা প্রতিবারেই একই উত্তর যাচ্ছেন সাধারণ ডাক্তার এর মত , তাহলে এই সেবা টা চালু করার দরকার ছিলো না , এখন আমাকে কিছু পরামর্শ দেন",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার সব সময় মাথা এলোমোলো আর অস্থিতিকর লাগে , স্বাভাভিক ভাবে থাকতে পারতেছিনা মানুষিক চাপ টেনশন আছে , বদহজম এর সমস্যা , সাথে হাই প্রেসার ও আছে অনেক ডাক্তার পরিক্ষা নিরিক্ষা করে ঔষধ খাচ্ছি olmezest am 5 / 20 , ribotril 0 . 5 mg , rabe 20 mg , apuldon 10 mg , এগুলান খেয়ে কিছুটা স্বাভাবিক থাকলেও পুরো স্বাভাবিক থাকতে পারতেছিনা , স্বাস্থ্য ও খারাপ , আপনাদের কাছে এসব এর প্রতিকার জানতে চাইলে আপনারা প্রতিবারেই একই উত্তর যাচ্ছেন সাধারণ ডাক্তার এর মত , তাহলে এই সেবা টা চালু করার দরকার ছিলো না , এখন আমাকে কিছু পরামর্শ দেন",
+        "gold_type": "Health Condition",
+        "error_kind": "type_confusion",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "thank you for asking question . it may happen for so many reasons . one of the cause is thyroid problem so please do s . ft3 , s . ft4 , s . tsh . then consult with a doctor . thank you .",
+        "gold_type": "Medical Procedure",
+        "error_kind": "boundary_error",
+        "confused_with": "Medical Procedure"
+      },
+      {
+        "tokens": "ডাক্তার ভাইকে প্রশ্ন করার জন্য ধন্যবাদ । tab . napa extend 665mg 1 + 1 + 1 if fever or pain , tab . fexo 120mg 1 + 0 + 1 5days",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "ডাক্তার ভাইকে প্রশ্ন করার জন্য ধন্যবাদ । tab . napa extend 665mg 1 + 1 + 1 if fever or pain , tab . fexo 120mg 1 + 0 + 1 5days",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "ডাক্তার ভাইকে প্রশ্ন করার জন্য ধন্যবাদ । tab . napa extend 665mg 1 + 1 + 1 if fever or pain , tab . fexo 120mg 1 + 0 + 1 5days",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "female , age 27 , weight 70kgs . amar last 3 din dhore pete uneasy . khawar poro pet kamrai . abar khele thik hoi olpo time er jonno . amar stool o ektu constipated . daily hoi but pressure diye korte hoi . sergel r omidon khacchi 3 din dhore but still hocche same . amr weight gain hoise ato khawar jonno . ki koronio ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "female , age 27 , weight 70kgs . amar last 3 din dhore pete uneasy . khawar poro pet kamrai . abar khele thik hoi olpo time er jonno . amar stool o ektu constipated . daily hoi but pressure diye korte hoi . sergel r omidon khacchi 3 din dhore but still hocche same . amr weight gain hoise ato khawar jonno . ki koronio ?",
+        "gold_type": "Dosage",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "female , age 27 , weight 70kgs . amar last 3 din dhore pete uneasy . khawar poro pet kamrai . abar khele thik hoi olpo time er jonno . amar stool o ektu constipated . daily hoi but pressure diye korte hoi . sergel r omidon khacchi 3 din dhore but still hocche same . amr weight gain hoise ato khawar jonno . ki koronio ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "female , age 27 , weight 70kgs . amar last 3 din dhore pete uneasy . khawar poro pet kamrai . abar khele thik hoi olpo time er jonno . amar stool o ektu constipated . daily hoi but pressure diye korte hoi . sergel r omidon khacchi 3 din dhore but still hocche same . amr weight gain hoise ato khawar jonno . ki koronio ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "female , age 27 , weight 70kgs . amar last 3 din dhore pete uneasy . khawar poro pet kamrai . abar khele thik hoi olpo time er jonno . amar stool o ektu constipated . daily hoi but pressure diye korte hoi . sergel r omidon khacchi 3 din dhore but still hocche same . amr weight gain hoise ato khawar jonno . ki koronio ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "ভাই / আপা আমি বেশকিছু দিন যাবত পারিবারিক কারণে মানসিক অশস্তিতে আছি । এমতাবস্থায় ঘুম কম হচ্ছে , মানসিক টেনসন হচ্ছে । করণীয় কী ? জানালে উপকৃত হবো ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "ভাই / আপা আমি বেশকিছু দিন যাবত পারিবারিক কারণে মানসিক অশস্তিতে আছি । এমতাবস্থায় ঘুম কম হচ্ছে , মানসিক টেনসন হচ্ছে । করণীয় কী ? জানালে উপকৃত হবো ।",
+        "gold_type": "Health Condition",
+        "error_kind": "type_confusion",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আপনাকে ধন্যবাদ প্রশ্ন করার জন্য । দূর্বলতা কোনো রোগ নয় । এটা রোগের লক্ষন । আপনি পরিমিত খাবার খান । পানি বেশি করে পান করুন । যে সব রোগে মানুষ বেশি দূর্বল হয় যেমন ডায়াবেটিস , রক্ত শুন্যতা , জন্ডিস রোগ আপনার আছে কিনা তা জানার চেষ্টা করুন । একজন মেডিসিন বিশেষজ্ঞ কে দিয়ে পরিক্ষা করিয়ে নিন । স্ট্রোক করলেও হাত পা দূর্বল হতে পারে । ঘুম ঠিক মত হচ্ছে কিনা খেয়াল করুন । দুশ্চিন্তা দূর করুন । ধন্যবাদ ।",
+        "gold_type": "Health Condition",
+        "error_kind": "boundary_error",
+        "confused_with": "Health Condition"
+      },
+      {
+        "tokens": "আমার ছোট ভাইয়ের জিহ্বার নিচে দুই মাস যাবৎ একটি সাদা গুটির মতো বিচি ওঠেছে । সে একজন ডাক্তার এর পরামর্শ মতো tab cefotil plus 125mg 1 + 0 + 1 - 7 days . micoral gel apply 3 times daily 7 days . / trialon oral paste apply 2 times daily 7 days . use করেছে । কিন্তু সমস্যা সমাধান হচ্ছে না । সমস্যা সমাধানে পরামর্শ দেন । নতুবা নাক , কান , গলা বিশেষজ্ঞ চিকিৎসকের একজন ডাক্তার সাহেব এর facebook i ' d চাচ্ছিলাম । ( আপনাকে ছবিসহ পাঠানো রেমিটেন্স জন্য ) name : < name > age : 11",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "আমার ছোট ভাইয়ের জিহ্বার নিচে দুই মাস যাবৎ একটি সাদা গুটির মতো বিচি ওঠেছে । সে একজন ডাক্তার এর পরামর্শ মতো tab cefotil plus 125mg 1 + 0 + 1 - 7 days . micoral gel apply 3 times daily 7 days . / trialon oral paste apply 2 times daily 7 days . use করেছে । কিন্তু সমস্যা সমাধান হচ্ছে না । সমস্যা সমাধানে পরামর্শ দেন । নতুবা নাক , কান , গলা বিশেষজ্ঞ চিকিৎসকের একজন ডাক্তার সাহেব এর facebook i ' d চাচ্ছিলাম । ( আপনাকে ছবিসহ পাঠানো রেমিটেন্স জন্য ) name : < name > age : 11",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "আমার ছোট ভাইয়ের জিহ্বার নিচে দুই মাস যাবৎ একটি সাদা গুটির মতো বিচি ওঠেছে । সে একজন ডাক্তার এর পরামর্শ মতো tab cefotil plus 125mg 1 + 0 + 1 - 7 days . micoral gel apply 3 times daily 7 days . / trialon oral paste apply 2 times daily 7 days . use করেছে । কিন্তু সমস্যা সমাধান হচ্ছে না । সমস্যা সমাধানে পরামর্শ দেন । নতুবা নাক , কান , গলা বিশেষজ্ঞ চিকিৎসকের একজন ডাক্তার সাহেব এর facebook i ' d চাচ্ছিলাম । ( আপনাকে ছবিসহ পাঠানো রেমিটেন্স জন্য ) name : < name > age : 11",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার ছোট ভাইয়ের জিহ্বার নিচে দুই মাস যাবৎ একটি সাদা গুটির মতো বিচি ওঠেছে । সে একজন ডাক্তার এর পরামর্শ মতো tab cefotil plus 125mg 1 + 0 + 1 - 7 days . micoral gel apply 3 times daily 7 days . / trialon oral paste apply 2 times daily 7 days . use করেছে । কিন্তু সমস্যা সমাধান হচ্ছে না । সমস্যা সমাধানে পরামর্শ দেন । নতুবা নাক , কান , গলা বিশেষজ্ঞ চিকিৎসকের একজন ডাক্তার সাহেব এর facebook i ' d চাচ্ছিলাম । ( আপনাকে ছবিসহ পাঠানো রেমিটেন্স জন্য ) name : < name > age : 11",
+        "gold_type": "Specialist",
+        "error_kind": "boundary_error",
+        "confused_with": "Specialist"
+      },
+      {
+        "tokens": "আমার ছোট ভাইয়ের জিহ্বার নিচে দুই মাস যাবৎ একটি সাদা গুটির মতো বিচি ওঠেছে । সে একজন ডাক্তার এর পরামর্শ মতো tab cefotil plus 125mg 1 + 0 + 1 - 7 days . micoral gel apply 3 times daily 7 days . / trialon oral paste apply 2 times daily 7 days . use করেছে । কিন্তু সমস্যা সমাধান হচ্ছে না । সমস্যা সমাধানে পরামর্শ দেন । নতুবা নাক , কান , গলা বিশেষজ্ঞ চিকিৎসকের একজন ডাক্তার সাহেব এর facebook i ' d চাচ্ছিলাম । ( আপনাকে ছবিসহ পাঠানো রেমিটেন্স জন্য ) name : < name > age : 11",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "আমার জরায়ু থেকে প্রচুর পরিমানে সাদা স্রাব বের হচ্ছে । তা দেখতে অনেকটা ক্রিম রাবারের মতো । আর জরায়ুর পাশে অনেক চুলকানি হয় এখন কি করবো বুঝতে পারছি না ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার জরায়ু থেকে প্রচুর পরিমানে সাদা স্রাব বের হচ্ছে । তা দেখতে অনেকটা ক্রিম রাবারের মতো । আর জরায়ুর পাশে অনেক চুলকানি হয় এখন কি করবো বুঝতে পারছি না ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "প্রেগ্ন্যাসির বয়স ৪ মাস , হঠাত করেই ব্লিডিং শুরু হইছে । আর পেটে ব্যাথা । কোন রকম আঘাত ও পায় নাই । প্রথমে হালকা ব্লিডিং শুরু হইছে । এখন বেশি হইতেছে ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "amer 1 mash jabot gola betha . dr furotil 250mg 7 din & fexo 14 din khete bolse shate menthol er vap nete bolse dine 3 ber . kotha bolte nished korse . but amader je kaj kotha na bole kaj kora shombob na . 8din hoise but golar improv dekhe na . golar tone change hoye gese . kotha bolte kosto hoi . ami akhon ki korte pari pls suggest korben .",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "amer 1 mash jabot gola betha . dr furotil 250mg 7 din & fexo 14 din khete bolse shate menthol er vap nete bolse dine 3 ber . kotha bolte nished korse . but amader je kaj kotha na bole kaj kora shombob na . 8din hoise but golar improv dekhe na . golar tone change hoye gese . kotha bolte kosto hoi . ami akhon ki korte pari pls suggest korben .",
+        "gold_type": "Medicine",
+        "error_kind": "boundary_error",
+        "confused_with": "Medicine"
+      },
+      {
+        "tokens": "amr babu r age 5 month colsa . . . koydin daksi babu r thanda thanda vab . or thanda lagla nak dea pani pora na . . nessa ' s ar somy sobdo hossa . kicu akta somadan dan . . .",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "amr babu r age 5 month colsa . . . koydin daksi babu r thanda thanda vab . or thanda lagla nak dea pani pora na . . nessa ' s ar somy sobdo hossa . kicu akta somadan dan . . .",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "ডাক্তার ভাইতে প্রশ্ন করার জন্যে আপনাকে ধন্যবাদ । আপনি tab - fexo 120 mg 1 + 0 + 1 ৫ দিন খাবেন । চক্ষু বিশেষজ্ঞ চিকিৎসক দেখিয়ে পরবর্তী পদক্ষেপ নিবেন ।",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "amar age 28 jor ase 101 sathe danda kashi ache a motobostay ami ki korbo sir ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "ডাক্তারভাইকে প্রশ্ন করার জন্য ধন্যবাদ । tab algin 50mg - - 1 + 1 + 1 after meal when there is pain . আপাতত ব্যথার জন্য ঔষধটি খাবেন । আপনার স্ত্রী যে গাইনী ডাক্তারের চিকিৎসাধীন আছেন দ্রুত উনার পরামর্শ নিন । ধন্যবাদ ।",
+        "gold_type": "Specialist",
+        "error_kind": "boundary_error",
+        "confused_with": "Specialist"
+      },
+      {
+        "tokens": "ডাক্তারভাইকে প্রশ্ন করার জন্য ধন্যবাদ । tab algin 50mg - - 1 + 1 + 1 after meal when there is pain . আপাতত ব্যথার জন্য ঔষধটি খাবেন । আপনার স্ত্রী যে গাইনী ডাক্তারের চিকিৎসাধীন আছেন দ্রুত উনার পরামর্শ নিন । ধন্যবাদ ।",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "ডাক্তার ভাই কে প্রশ্ন করার জন্য ধন্যবাদ । আপনি ২ কানেে ২ / ৩ফোটা করে সরিষার তেল দিন । এছারা নাক কান গলা বিশেষজ্ঞের পরামর্শ নিন ।",
+        "gold_type": "Specialist",
+        "error_kind": "boundary_error",
+        "confused_with": "Specialist"
+      },
+      {
+        "tokens": "thank you for your question . viodin mouthwash 3times daily for 2 weeks . thank you .",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "আমি আমার বাম কানে রক্তপাপাত দেখার পর ডাক্টার এর কাছে গেলে উনি একটা ড্রপ ( ১৫দিনের জন্য ) ও একটা টেবলেট দেন ( ৭ দিনের জন্য ) ড্রপ দেওয়ার পর হালকা ব্যাথা অনুভব করি , এবং কালকে রাত্রে ট্যাবলেট টা খাওয়ার পর প্রচন্ড ব্যাথায় সারা রাত খুমতে পারিনি , এখনও আমার ব্যাথা কমেনাই , উল্লেক্ষ্য যে আমার ওষুধ খাওয়ার আগে ব্যাথা ছিলো না . . . . .",
+        "gold_type": "Dosage",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমি আমার বাম কানে রক্তপাপাত দেখার পর ডাক্টার এর কাছে গেলে উনি একটা ড্রপ ( ১৫দিনের জন্য ) ও একটা টেবলেট দেন ( ৭ দিনের জন্য ) ড্রপ দেওয়ার পর হালকা ব্যাথা অনুভব করি , এবং কালকে রাত্রে ট্যাবলেট টা খাওয়ার পর প্রচন্ড ব্যাথায় সারা রাত খুমতে পারিনি , এখনও আমার ব্যাথা কমেনাই , উল্লেক্ষ্য যে আমার ওষুধ খাওয়ার আগে ব্যাথা ছিলো না . . . . .",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমি আমার বাম কানে রক্তপাপাত দেখার পর ডাক্টার এর কাছে গেলে উনি একটা ড্রপ ( ১৫দিনের জন্য ) ও একটা টেবলেট দেন ( ৭ দিনের জন্য ) ড্রপ দেওয়ার পর হালকা ব্যাথা অনুভব করি , এবং কালকে রাত্রে ট্যাবলেট টা খাওয়ার পর প্রচন্ড ব্যাথায় সারা রাত খুমতে পারিনি , এখনও আমার ব্যাথা কমেনাই , উল্লেক্ষ্য যে আমার ওষুধ খাওয়ার আগে ব্যাথা ছিলো না . . . . .",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমি আমার বাম কানে রক্তপাপাত দেখার পর ডাক্টার এর কাছে গেলে উনি একটা ড্রপ ( ১৫দিনের জন্য ) ও একটা টেবলেট দেন ( ৭ দিনের জন্য ) ড্রপ দেওয়ার পর হালকা ব্যাথা অনুভব করি , এবং কালকে রাত্রে ট্যাবলেট টা খাওয়ার পর প্রচন্ড ব্যাথায় সারা রাত খুমতে পারিনি , এখনও আমার ব্যাথা কমেনাই , উল্লেক্ষ্য যে আমার ওষুধ খাওয়ার আগে ব্যাথা ছিলো না . . . . .",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমি আমার বাম কানে রক্তপাপাত দেখার পর ডাক্টার এর কাছে গেলে উনি একটা ড্রপ ( ১৫দিনের জন্য ) ও একটা টেবলেট দেন ( ৭ দিনের জন্য ) ড্রপ দেওয়ার পর হালকা ব্যাথা অনুভব করি , এবং কালকে রাত্রে ট্যাবলেট টা খাওয়ার পর প্রচন্ড ব্যাথায় সারা রাত খুমতে পারিনি , এখনও আমার ব্যাথা কমেনাই , উল্লেক্ষ্য যে আমার ওষুধ খাওয়ার আগে ব্যাথা ছিলো না . . . . .",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "kopale fora hoiche khub pain sarjari kora jabe ki ? ? ? ?",
+        "gold_type": "Health Condition",
+        "error_kind": "boundary_error",
+        "confused_with": "Health Condition"
+      },
+      {
+        "tokens": "আপনাকে ধন্যবাদ প্রশ্ন করার জন্য । আপনি মাথা ব্যাথার জন্য প্যারাসিটামল একটা খেতে পারেন খাবার পরে । কফি খেয়ে দেখতে পারেন । একজন মেডিসিন ডাক্তারকে দেখিয়ে নিন । ধন্যবাদ",
+        "gold_type": "Dosage",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "amr nail r problem ace , ki korle nail ta more jay and new nail utbe . . please janaben . . ki medicine khete hobe . . ?",
+        "gold_type": "Health Condition",
+        "error_kind": "type_confusion",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "amer chaler boyos 30 mas musol mani kora jabe ? korle kono somossa hobe ki",
+        "gold_type": "Medical Procedure",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "ami marrid . . . . amar means date moto hosce na 2 / 3mas pore hosce ate ki amar pargnancy kono problem hobe . . .",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "বয়স প্রায় তিন বছর ঠিকমতন খাওয়া - দাওয়া করে না খেতে চায় না খাওয়ায় অরুচি একদিন পর পর পায়খানা করে পায়খানা কষা এখনো এখনো দাঁড়াতে পারে না মানে সেভাবে হাতে পায়ে বল না",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "বয়স প্রায় তিন বছর ঠিকমতন খাওয়া - দাওয়া করে না খেতে চায় না খাওয়ায় অরুচি একদিন পর পর পায়খানা করে পায়খানা কষা এখনো এখনো দাঁড়াতে পারে না মানে সেভাবে হাতে পায়ে বল না",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "ডাক্তার ভাইকে প্রশ্ন করার জন্য ধন্যবাদ । tab bextrum gold - একটি করে ট্যাবলেট ' একবেলা ১৫ দিন । tab xinc b - 1 টি করে ট্যাবলেট দুইবেলা দশ দিন । এবং পেটে ব্যথা হলে tab algin 50 - 1 টি করে ট্যাবলেট তিনবেলা তিন দিন খেতে পারেন । ধন্যবাদ",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "ডাক্তার ভাইকে প্রশ্ন করার জন্য ধন্যবাদ । tab bextrum gold - একটি করে ট্যাবলেট ' একবেলা ১৫ দিন । tab xinc b - 1 টি করে ট্যাবলেট দুইবেলা দশ দিন । এবং পেটে ব্যথা হলে tab algin 50 - 1 টি করে ট্যাবলেট তিনবেলা তিন দিন খেতে পারেন । ধন্যবাদ",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "আপনাকে ধন্যবাদ প্রশ্ন করার জন্য । আপনি ট্যাবলেট এলাট্রল ১০ মিলিগ্রাম রাতে একটা খেতে পারেন । এন্টাজল নেজাল ড্রপ দুই ফোটা করে তিন বার করে দুই নাকে দিন । ধন্যবাদ ।",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "আমার বঊয়ের মাসিকে আগের তুলনায় একটু বেশি রক্ত বের হচ্ছে কী করবো ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "hlw vaiya amar sorir a besi sokti paina r durbol lage khub vari kaj korte parina . . . ami ki vitamin serap r calcium tablet khete parbo ? ar konta khele sorir aktu mota hbo sastho vlo hbe . . sokti fire pbo aktu suggest koren plz ? ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "hlw vaiya amar sorir a besi sokti paina r durbol lage khub vari kaj korte parina . . . ami ki vitamin serap r calcium tablet khete parbo ? ar konta khele sorir aktu mota hbo sastho vlo hbe . . sokti fire pbo aktu suggest koren plz ? ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "thanks for your question to daktar bhai . please take shower to reduce temperature . take napa and do cbc , urine r / e , widal test . thanks",
+        "gold_type": "Medical Procedure",
+        "error_kind": "boundary_error",
+        "confused_with": "Medical Procedure"
+      },
+      {
+        "tokens": "my mother ' s age is around 60 . she feels her whole body itching at night . she doesn ' t have any medical condition . what can be the reason ? what medication or remedy should be followed ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার দীর্ঘ ৫ দিন যাবত টানা জ্বর । দিনের দিকে কিছুটা কমলেও রাত্রে তা বেড়ে যায় । সাথে পুরো শরীরে প্রচন্ড ব্যাথা । বুকে হালকা কফ জমে । ডাক্তারের সংগে পরামর্শ করে নাপা , কফ সিরাপ ও zimax 500 এন্টিবায়োটিক নিচ্ছি । সাথে লেবুর রস ও চা পান করছি । তবে তেমন সুবিধা হচ্ছে । এ অবস্থায় কি করা উচিত ? ? ( ডায়াবেটিস বা অন্য দীর্ঘ মেয়াদি রোগ নেই )",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার দীর্ঘ ৫ দিন যাবত টানা জ্বর । দিনের দিকে কিছুটা কমলেও রাত্রে তা বেড়ে যায় । সাথে পুরো শরীরে প্রচন্ড ব্যাথা । বুকে হালকা কফ জমে । ডাক্তারের সংগে পরামর্শ করে নাপা , কফ সিরাপ ও zimax 500 এন্টিবায়োটিক নিচ্ছি । সাথে লেবুর রস ও চা পান করছি । তবে তেমন সুবিধা হচ্ছে । এ অবস্থায় কি করা উচিত ? ? ( ডায়াবেটিস বা অন্য দীর্ঘ মেয়াদি রোগ নেই )",
+        "gold_type": "Medicine",
+        "error_kind": "boundary_error",
+        "confused_with": "Medicine"
+      },
+      {
+        "tokens": "আমার দীর্ঘ ৫ দিন যাবত টানা জ্বর । দিনের দিকে কিছুটা কমলেও রাত্রে তা বেড়ে যায় । সাথে পুরো শরীরে প্রচন্ড ব্যাথা । বুকে হালকা কফ জমে । ডাক্তারের সংগে পরামর্শ করে নাপা , কফ সিরাপ ও zimax 500 এন্টিবায়োটিক নিচ্ছি । সাথে লেবুর রস ও চা পান করছি । তবে তেমন সুবিধা হচ্ছে । এ অবস্থায় কি করা উচিত ? ? ( ডায়াবেটিস বা অন্য দীর্ঘ মেয়াদি রোগ নেই )",
+        "gold_type": "Medicine",
+        "error_kind": "boundary_error",
+        "confused_with": "Medicine"
+      },
+      {
+        "tokens": "avolac 100ml sirap kolar koidin pojonto khw jai .",
+        "gold_type": "Medicine",
+        "error_kind": "boundary_error",
+        "confused_with": "Medicine"
+      },
+      {
+        "tokens": "আমি < name > lগত তিন মাস যাবৎ শুকনো কাশিতে ভুগছিl মাঝেমধ্যে ঠান্ডা বাতাস লাগলে শুকনো কাশি বেশি হয় l rojith = 500 এন্টিবায়োটিক খাওয়ার পরও ভালো হচ্ছে না lএক্ষেত্রে আমার করনীয় কি ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "ডাক্তার ভাইকে প্রশ্ন করার জন্য ধন্যবাদ । tab monas 10 , 0 + 0 + 1 , 10 days . syrup adovas , 2 spoon , 3 times , 7 days . ধন্যবাদ ।",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "ডাক্তার ভাইকে প্রশ্ন করার জন্য ধন্যবাদ । tab monas 10 , 0 + 0 + 1 , 10 days . syrup adovas , 2 spoon , 3 times , 7 days . ধন্যবাদ ।",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "krimir syrup bacchader kivabe khawabo . dose ? # almex 3 yr and 8 yr",
+        "gold_type": "Age",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার ওয়াইফ বয়স ২৫ সমস্যা : - ১ / প্রস্রাবের রাস্তা জ্বালা যন্ত্রণা করে । রাত ৯টা থেকে শুরু করে রাত ১২টার দিকে কমে । এখন আমার কি করা উচিত যদি বলতেন উপকৃত হতাম । ধন্যবাদ",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার রানের মাঝে সাদা সাদা হয়ে থাকে পানি পরলে কালো হয়ে যায় প্রচন্ড চুলকায় চুলকাতে মজা লাগে but পরবর্তীতে জ্বলে অনেক সময় চুলকালে চামড়া উঠে মাঝে মাঝে পানি বের হয় কিছুটা দাদ এর মত নির্দিষ্ট জায়গা জুরে এই সমস্যা সমাধান দিবেন আশা করি",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার রানের মাঝে সাদা সাদা হয়ে থাকে পানি পরলে কালো হয়ে যায় প্রচন্ড চুলকায় চুলকাতে মজা লাগে but পরবর্তীতে জ্বলে অনেক সময় চুলকালে চামড়া উঠে মাঝে মাঝে পানি বের হয় কিছুটা দাদ এর মত নির্দিষ্ট জায়গা জুরে এই সমস্যা সমাধান দিবেন আশা করি",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার রানের মাঝে সাদা সাদা হয়ে থাকে পানি পরলে কালো হয়ে যায় প্রচন্ড চুলকায় চুলকাতে মজা লাগে but পরবর্তীতে জ্বলে অনেক সময় চুলকালে চামড়া উঠে মাঝে মাঝে পানি বের হয় কিছুটা দাদ এর মত নির্দিষ্ট জায়গা জুরে এই সমস্যা সমাধান দিবেন আশা করি",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার রানের মাঝে সাদা সাদা হয়ে থাকে পানি পরলে কালো হয়ে যায় প্রচন্ড চুলকায় চুলকাতে মজা লাগে but পরবর্তীতে জ্বলে অনেক সময় চুলকালে চামড়া উঠে মাঝে মাঝে পানি বের হয় কিছুটা দাদ এর মত নির্দিষ্ট জায়গা জুরে এই সমস্যা সমাধান দিবেন আশা করি",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "owsud anzet r cloron 2 aksathe khele ki kono prb hobe ? . .",
+        "gold_type": "Medicine",
+        "error_kind": "boundary_error",
+        "confused_with": "Medicine"
+      },
+      {
+        "tokens": "আমার মেয়ের বয়স ৩ মাস ২৬ দিন । গত ২৬ / ৯ / ২০২০ তারিখ পায়খানা করেছে , তারপর এখন পর্যন্ত পায়খানা হয়নি । খাওয়া দাওয়া ঠিকঠাক করছে । শারীরিক কোন সমস্যা নাই । কিন্তু পাদু করে ঘনঘন । প্রস্রাবও করে । বিস্তারিত জানাবেন প্লিজ ।",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার মেয়ের বয়স ৩ মাস ২৬ দিন । গত ২৬ / ৯ / ২০২০ তারিখ পায়খানা করেছে , তারপর এখন পর্যন্ত পায়খানা হয়নি । খাওয়া দাওয়া ঠিকঠাক করছে । শারীরিক কোন সমস্যা নাই । কিন্তু পাদু করে ঘনঘন । প্রস্রাবও করে । বিস্তারিত জানাবেন প্লিজ ।",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার মেয়ের বয়স ৩ মাস ২৬ দিন । গত ২৬ / ৯ / ২০২০ তারিখ পায়খানা করেছে , তারপর এখন পর্যন্ত পায়খানা হয়নি । খাওয়া দাওয়া ঠিকঠাক করছে । শারীরিক কোন সমস্যা নাই । কিন্তু পাদু করে ঘনঘন । প্রস্রাবও করে । বিস্তারিত জানাবেন প্লিজ ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার ছোট ভাই পশ্রাবের সমস্যার কারনে ক্যাথডা লাগানো হইছে প্রায় 3 মাস । উল্লেখ্য যে কয়েকটা ক্যাথডা চেঞ্জ করা হয়েছে 15 দিনের বেশি রাখা হয়নি । কিন্তু তার পশ্রাব পায়খানা এখনো স্বাভাবিক হয়নি । এক্ষেত্রে আমি কি করতে পারি ? ? উল্লেখ্য যে , সে ছাদ থেকে লাফ দিয়েছিলো । যার কারনে মেরুদণ্ড ভেঙে যায় । এবং পায়ের হাড়ে চোট পায়",
+        "gold_type": "Health Condition",
+        "error_kind": "boundary_error",
+        "confused_with": "Health Condition"
+      },
+      {
+        "tokens": "আমার সাদাস্রাবটা বেশি যাই । এ ক্ষেত্রে আমি কি করবো ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার ঠিকমতো ঘুম হচ্ছে না । আমি চেষ্টা করছি কিন্তু ঘুম আসছে না । আমার ঘুম বাড়ানোর জন্য কী করতে পারি ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার ৩ , ৪ দিন ধরে নামাজে দাড়ালে বা প্রশাব করে উঠলে মাঝে মাঝে মাথা ঘুরে উঠে শরীর দূর্বল লাগে অনেক দিন ধরে ঘুম আসে ৩ বা ৪ টার পরে । ঘাড়ের রগ হালকা হালকা টান খাচ্ছে বিপি মাপলাম বললো লো । আর গ্যাস্ট্রিক খুব সমস্যা করছে কি করবো ডঃ",
+        "gold_type": "Health Condition",
+        "error_kind": "type_confusion",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার ৩ , ৪ দিন ধরে নামাজে দাড়ালে বা প্রশাব করে উঠলে মাঝে মাঝে মাথা ঘুরে উঠে শরীর দূর্বল লাগে অনেক দিন ধরে ঘুম আসে ৩ বা ৪ টার পরে । ঘাড়ের রগ হালকা হালকা টান খাচ্ছে বিপি মাপলাম বললো লো । আর গ্যাস্ট্রিক খুব সমস্যা করছে কি করবো ডঃ",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "১১ মাস বয়সের মেয়ে শিশু সারাদিনে ৩ / ৪ বার পায়খানা করে মাঝে মাঝে পায়খানার সাথে পানি যায় এর জন্য কি করতে পারি ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "১১ মাস বয়সের মেয়ে শিশু সারাদিনে ৩ / ৪ বার পায়খানা করে মাঝে মাঝে পায়খানার সাথে পানি যায় এর জন্য কি করতে পারি ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "করোনা ভাইরাসে কি মানুষের থেকে পশু আক্রান্ত হতে পারে ?",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "amr gotokal dupor theke onk pet kharap , onk pani portese . sondha theke 103 jor , ajk3 dupor theke jor 100 r niche please advise",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "amr gotokal dupor theke onk pet kharap , onk pani portese . sondha theke 103 jor , ajk3 dupor theke jor 100 r niche please advise",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার সমসা হলো বুকের বাম পাসে কয় এক দিন জাবত বেথা ওনোভাব করছি এবন কপ উঠালে বিকট গন্দ বের হচ্ছে সাদা সাদা আটার মোত",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার সমসা হলো বুকের বাম পাসে কয় এক দিন জাবত বেথা ওনোভাব করছি এবন কপ উঠালে বিকট গন্দ বের হচ্ছে সাদা সাদা আটার মোত",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "sir , ami elish r chigri mas khele amr chokher paprir ongse cholkai r chik lal hoiye jai r pani pore r chok fole poch ache . . ekn ki kurbo sir",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আস্সালামুআলাইকুম । আমার বাচ্চার বয়স ৪মাস৮দিন । একটায় প্রব্লেম বেশি প্রস্রাব করতেছে । অতিরিক্ত প্রস্রাব করতেছে । এটা কি ঠিক কিনা ? ?",
+        "gold_type": "Age",
+        "error_kind": "type_confusion",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আস্সালামুআলাইকুম । আমার বাচ্চার বয়স ৪মাস৮দিন । একটায় প্রব্লেম বেশি প্রস্রাব করতেছে । অতিরিক্ত প্রস্রাব করতেছে । এটা কি ঠিক কিনা ? ?",
+        "gold_type": "Age",
+        "error_kind": "type_confusion",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "ডাক্তার ভাই কে প্রশ্ন করার জন্য ধন্যবাদ । আপনি ভালো কোনো ডায়াগনসটিক সেন্টার থেকে s . creatinine and x - ray kub region b / v করিয়ে নিন । যেহেতু অনেক দিন ধরে ব্যাথা । তারপর আবার আমাদের সাথে যোগাযোগ করবেন ধন্যবাদ ।",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "ডাক্তার ভাই কে প্রশ্ন করার জন্য ধন্যবাদ । আপনি ভালো কোনো ডায়াগনসটিক সেন্টার থেকে s . creatinine and x - ray kub region b / v করিয়ে নিন । যেহেতু অনেক দিন ধরে ব্যাথা । তারপর আবার আমাদের সাথে যোগাযোগ করবেন ধন্যবাদ ।",
+        "gold_type": "Medical Procedure",
+        "error_kind": "boundary_error",
+        "confused_with": "Medical Procedure"
+      },
+      {
+        "tokens": "amar buker bampase majemaje pin pin betha onuvob hoy . kono tension e thakle besi kore . . . ami pani daily 3 litre er moto khai . porar jonno rate jagte hoy . abar kokhono kokhono rate ghum e ase na . . buke edoroner betha hoy keno ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার আজ সকাল থেকে প্রচন্ড পেট ব্যাথা ! পেটের নিচের অংশে কেমন যেন এক্টা অসস্তি ফিল করছি . . রোজা আছি ! এখন কি করা যায় ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার বাচ্চার বয়স ৯ বছর , ওজন ৩৫ কেজি , গতকাল থেকে তার সর্দি লেগেছে , কাশি দিলে বুকের ভেতর ঘড় ঘড় করছে ৷ নাক দিয়ে সর্দি বের হচ্ছে না ৷ গতকাল করোনার টিকা দেওয়া হয়েছে ৷ এখন কি মেডিসিন দেব ?",
+        "gold_type": "Medicine",
+        "error_kind": "type_confusion",
+        "confused_with": "Medical Procedure"
+      },
+      {
+        "tokens": "আমার বাচ্চার বয়স ৯ বছর , ওজন ৩৫ কেজি , গতকাল থেকে তার সর্দি লেগেছে , কাশি দিলে বুকের ভেতর ঘড় ঘড় করছে ৷ নাক দিয়ে সর্দি বের হচ্ছে না ৷ গতকাল করোনার টিকা দেওয়া হয়েছে ৷ এখন কি মেডিসিন দেব ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার বাচ্চার বয়স ৯ বছর , ওজন ৩৫ কেজি , গতকাল থেকে তার সর্দি লেগেছে , কাশি দিলে বুকের ভেতর ঘড় ঘড় করছে ৷ নাক দিয়ে সর্দি বের হচ্ছে না ৷ গতকাল করোনার টিকা দেওয়া হয়েছে ৷ এখন কি মেডিসিন দেব ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আপনার প্রশ্নের জন্য ধন্যবাদ । করোনা ভাইরাস প্রতিরোধের কোন ওষুধ নেই । ধন্যবাদ",
+        "gold_type": "Health Condition",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার কোমড়ের হাড় ক্ষয় হচ্ছে , আগে পরিক্ষা করেছিলাম । ঔষধ খেলে ভালো চলে , ভারি কাজ করলে ব্যথা বেড়ে যায় । ক্যালবো খাই , গতকাল ফার্মেসি থেকে কোরালেক্স দিয়েছে , এটা খাওয়া যাবে কি ?",
+        "gold_type": "Health Condition",
+        "error_kind": "boundary_error",
+        "confused_with": "Health Condition"
+      },
+      {
+        "tokens": "আমার বাবার বিগত ৪ বছর ধরে হজমে সমস্যা হয় । নাভির চারপাশে সবসময় ব্যথা করে । ডাল , মাংস , দুধ খেলে পেট ব্যথা করে । বার বার পায়খানায় যায় । এখন শরী র খুব দুর্বল । এখন ডাক্তার দেখানোর তো কোন উপায় নেই । তাই দয়া করে কোন ওষুধের কথা যদি বলতেন ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার বাবার বিগত ৪ বছর ধরে হজমে সমস্যা হয় । নাভির চারপাশে সবসময় ব্যথা করে । ডাল , মাংস , দুধ খেলে পেট ব্যথা করে । বার বার পায়খানায় যায় । এখন শরী র খুব দুর্বল । এখন ডাক্তার দেখানোর তো কোন উপায় নেই । তাই দয়া করে কোন ওষুধের কথা যদি বলতেন ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার চোখে ভাইরাল ভাইরাজ হয়ছিল , গোপালগঙ্গ থেকে ডাক্তার দেখাইছিলাম , ড্রপ এবং জেল দিছিলো , সেরে গিছে কিন্তু , যে চোখে হয়ছিলো বা পাসের চোখ ওটা এখনো হালকা ছোট হয়ে আছে ডান পাসের টার থেকে , এটা কি সমস্য , সমাধান বলেন প্লিজ",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "সবসময় ই মুখে ঘামাছির মত ছোট ছোট ব্রন উঠে আর শাল এর মত বের হয় ৷ একটা সময় মুখে কালো দাগ হয়ে গেছ ৷ এখন ব্রন এর দাগ দূর করার জন্য কি নিম পাতা বেটে pack বানিয়ে face এ লাগানো যাবে . . . ? কিনবা এর সাথে আরো কোন কিছুর সংমিশ্রন ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "সবসময় ই মুখে ঘামাছির মত ছোট ছোট ব্রন উঠে আর শাল এর মত বের হয় ৷ একটা সময় মুখে কালো দাগ হয়ে গেছ ৷ এখন ব্রন এর দাগ দূর করার জন্য কি নিম পাতা বেটে pack বানিয়ে face এ লাগানো যাবে . . . ? কিনবা এর সাথে আরো কোন কিছুর সংমিশ্রন ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "সবসময় ই মুখে ঘামাছির মত ছোট ছোট ব্রন উঠে আর শাল এর মত বের হয় ৷ একটা সময় মুখে কালো দাগ হয়ে গেছ ৷ এখন ব্রন এর দাগ দূর করার জন্য কি নিম পাতা বেটে pack বানিয়ে face এ লাগানো যাবে . . . ? কিনবা এর সাথে আরো কোন কিছুর সংমিশ্রন ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "ডাক্তার ভাই কে প্রশ্ন করার জন্য ধন্যবাদ । পর্যাপ্ত ঘুম , নিয়মিত ঔষধ সেবন এবং দুশ্চিন্তা না করা , সব সময় ভাল চিন্তা করুন আপনি একজন psychiatrist এর পরামর্শ নিতে পারেন । ধন্যবাদ",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার মেয়ের বয়স 4মাস গত কয়েক দিন ধরে আমাশার মত পায়খানা করছে কোন ওষুধ খাওয়ানো হয়নি 2দিন আগে টিকা দিয়েছে দুই পায়ে দুইটা । আগে বুকের দুধ খাওয়ার রুচি খুব ছিলো কিন্ত গতকাল থেকে খেতে চাচ্ছে না করনিয় কি ?",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "আমার মেয়ের বয়স 4মাস গত কয়েক দিন ধরে আমাশার মত পায়খানা করছে কোন ওষুধ খাওয়ানো হয়নি 2দিন আগে টিকা দিয়েছে দুই পায়ে দুইটা । আগে বুকের দুধ খাওয়ার রুচি খুব ছিলো কিন্ত গতকাল থেকে খেতে চাচ্ছে না করনিয় কি ?",
+        "gold_type": "Symptom",
+        "error_kind": "missed",
+        "confused_with": null
+      },
+      {
+        "tokens": "আমার মেয়ের বয়স 4মাস গত কয়েক দিন ধরে আমাশার মত পায়খানা করছে কোন ওষুধ খাওয়ানো হয়নি 2দিন আগে টিকা দিয়েছে দুই পায়ে দুইটা । আগে বুকের দুধ খাওয়ার রুচি খুব ছিলো কিন্ত গতকাল থেকে খেতে চাচ্ছে না করনিয় কি ?",
+        "gold_type": "Health Condition",
+        "error_kind": "type_confusion",
+        "confused_with": "Symptom"
+      },
+      {
+        "tokens": "tsh test results . 55 ulu / ml . is it good to me ?",
+        "gold_type": "Symptom",
+        "error_kind": "type_confusion",
+        "confused_with": "Medical Procedure"
+      },
+      {
+        "tokens": "আপনাকে ধন্যবাদ প্রশ্ন করার জন্য । syp . hunycof ২ চামচ করে দিনে তিন বার খান । ধন্যবাদ ।",
+        "gold_type": "Dosage",
+        "error_kind": "boundary_error",
+        "confused_with": "Dosage"
+      },
+      {
+        "tokens": "sy . hunycof টানা ৪ টা খাওয়া হয়েছে । তবুও শুষ্ক কাশি কমতেছে না ।",
+        "gold_type": "Symptom",
+        "error_kind": "boundary_error",
+        "confused_with": "Symptom"
+      }
+    ]
+  },
+  "note_on_spelling_variants": "Not automatically categorized: detecting a genuine spelling variant (vs. a different word) needs a reference dictionary or edit-distance index this project does not build. See phase12_error_sample.csv for manual review instead (guide 15.3)."
+}

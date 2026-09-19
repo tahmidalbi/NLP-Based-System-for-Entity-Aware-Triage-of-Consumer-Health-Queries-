@@ -2,6 +2,10 @@
 embeddings/*.bin
 embeddings/*.vec
 checkpoints/*.pt
+# Model weights at any depth (a Kaggle output bundle extracts them under results/checkpoints/)
+*.pt
+*.pth
+*.safetensors
 data/processed/
 logs/
 
@@ -14,6 +18,13 @@ venv/
 # Downloaded Kaggle output bundles (the useful contents are extracted into
 # results/, figures/ and checkpoints/ and committed individually)
 *.zip
+
+# Extra files a Kaggle notebook Output bundles when extracted into results/:
+# a copy of the uploaded dataset/code, not results.
+results/data/
+results/scripts/
+results/requirements.txt
+results/__huggingface_repos__.json
 
 # Hugging Face / dataset caches
 .cache/
