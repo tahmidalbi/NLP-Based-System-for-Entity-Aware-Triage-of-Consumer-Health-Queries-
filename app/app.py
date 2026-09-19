@@ -64,6 +64,21 @@ ENTITY_COLORS = {
     "Medical Procedure": "#0f766e",
 }
 
+# Runs once when the page loads. Gradio's own component chrome (radio
+# buttons, checkboxes, ...) follows the OS/browser's prefers-color-scheme
+# unless explicitly told otherwise via the documented ?__theme= query param.
+# This makes that permanent instead of relying on every viewer to know the
+# trick or match our light design by coincidence.
+FORCE_LIGHT_JS = """
+() => {
+    const url = new URL(window.location);
+    if (url.searchParams.get('__theme') !== 'light') {
+        url.searchParams.set('__theme', 'light');
+        window.location.replace(url.toString());
+    }
+}
+"""
+
 CUSTOM_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
@@ -471,10 +486,15 @@ def main():
         share=args.share,
         server_port=args.port,
         theme=gr.themes.Base(
-            primary_hue="blue", secondary_hue="slate", neutral_hue="slate",
+            primary_hue="emerald", secondary_hue="stone", neutral_hue="stone",
             font=[gr.themes.GoogleFont("Inter"), "ui-sans-serif", "sans-serif"],
         ),
         css=CUSTOM_CSS,
+        # Gradio auto-switches its own component chrome (radio buttons,
+        # checkboxes, etc.) to dark mode when the OS/browser prefers it,
+        # independently of our custom light CSS - forcing __theme=light here
+        # keeps the whole page consistent regardless of viewer's OS setting.
+        js=FORCE_LIGHT_JS,
     )
 
 
