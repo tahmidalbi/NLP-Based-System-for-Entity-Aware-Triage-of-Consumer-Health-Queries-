@@ -49,184 +49,238 @@ MODE_TO_ARCHS = {
     MODE_BOTH: ["bilstm", "transformer"],
 }
 
+# Muted, print-safe palette - the same family a clinical chart or a
+# hospital-system status indicator would use, not saturated "UI accent" hues.
 SEVERITY_STYLE = {
-    "Emergency":     {"color": "#ff4d6d", "glow": "rgba(255,77,109,0.35)", "icon": "🚨"},
-    "Urgent":        {"color": "#ffa53d", "glow": "rgba(255,165,61,0.35)", "icon": "⚠️"},
-    "Routine":       {"color": "#3ddc97", "glow": "rgba(61,220,151,0.35)", "icon": "🩺"},
-    "General Query": {"color": "#4cc9f0", "glow": "rgba(76,201,240,0.35)", "icon": "💬"},
+    "Emergency":     {"color": "#b42318", "bg": "#fef3f2", "border": "#fda29b", "label": "EMERGENCY"},
+    "Urgent":        {"color": "#b54708", "bg": "#fffaeb", "border": "#fec84b", "label": "URGENT"},
+    "Routine":       {"color": "#067647", "bg": "#ecfdf3", "border": "#6ce9a6", "label": "ROUTINE"},
+    "General Query": {"color": "#175cd3", "bg": "#eff8ff", "border": "#84caff", "label": "GENERAL QUERY"},
 }
 
 ENTITY_COLORS = {
-    "Symptom": "#8b5cf6", "Health Condition": "#ec4899", "Medicine": "#06b6d4",
-    "Age": "#f59e0b", "Dosage": "#10b981", "Specialist": "#6366f1",
-    "Medical Procedure": "#14b8a6",
+    "Symptom": "#6941c6", "Health Condition": "#c11574", "Medicine": "#0e7490",
+    "Age": "#b54708", "Dosage": "#067647", "Specialist": "#3538cd",
+    "Medical Procedure": "#0f766e",
 }
 
 CUSTOM_CSS = """
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --bc-bg-0: #0b0f19; --bc-bg-1: #121826; --bc-bg-2: #1a2333;
-  --bc-border: #2a3550; --bc-text: #e6ebf5; --bc-text-dim: #93a1bf;
-  --bc-accent: #06b6d4; --bc-accent-2: #8b5cf6;
+  --bc-bg: #f7f8fa;
+  --bc-surface: #ffffff;
+  --bc-border: #e3e6eb;
+  --bc-border-strong: #cdd2db;
+  --bc-text: #1a2233;
+  --bc-text-dim: #667085;
+  --bc-accent: #175cd3;
+  --bc-accent-dark: #10437a;
 }
 
 .gradio-container {
-  background: radial-gradient(circle at 15% 0%, #16213a 0%, var(--bc-bg-0) 45%) !important;
-  font-family: 'Inter', ui-sans-serif, sans-serif !important;
+  background: var(--bc-bg) !important;
+  font-family: 'Inter', ui-sans-serif, -apple-system, sans-serif !important;
   color: var(--bc-text) !important;
 }
 
-#bc-header { text-align: center; padding: 8px 0 4px 0; }
-#bc-header h1 {
-  font-family: 'Space Grotesk', sans-serif !important;
-  font-size: 2.4em !important; font-weight: 700 !important; margin-bottom: 2px !important;
-  background: linear-gradient(90deg, #4cc9f0, #8b5cf6 60%, #ff4d6d);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text; letter-spacing: 0.5px;
+/* ---- masthead: a letterhead, not a hero banner ---- */
+#bc-header {
+  border-bottom: 1px solid var(--bc-border-strong);
+  padding: 18px 4px 16px 4px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
 }
-#bc-header p { color: var(--bc-text-dim) !important; font-size: 1.02em; margin-top: 0 !important; }
+#bc-header .bc-brand {
+  display: flex; align-items: baseline; gap: 10px;
+}
+#bc-header .bc-mark {
+  display: inline-block; width: 9px; height: 9px; border-radius: 2px;
+  background: var(--bc-accent); position: relative; top: -1px;
+}
+#bc-header h1 {
+  font-size: 1.5em !important; font-weight: 700 !important; letter-spacing: -0.01em;
+  color: var(--bc-text) !important; margin: 0 !important;
+}
+#bc-header .bc-tagline {
+  color: var(--bc-text-dim) !important; font-size: 0.88em; margin: 0 !important;
+}
+#bc-header .bc-badge {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.72em; color: var(--bc-text-dim);
+  border: 1px solid var(--bc-border-strong); border-radius: 4px; padding: 3px 8px;
+  letter-spacing: 0.03em;
+}
 
 .bc-card {
-  background: linear-gradient(180deg, var(--bc-bg-1), var(--bc-bg-2)) !important;
-  border: 1px solid var(--bc-border) !important; border-radius: 16px !important;
-  padding: 18px !important; box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  background: var(--bc-surface) !important;
+  border: 1px solid var(--bc-border) !important; border-radius: 8px !important;
+  padding: 20px !important; box-shadow: 0 1px 2px rgba(16,24,40,0.04);
 }
 
 .bc-section-label {
-  font-family: 'Space Grotesk', sans-serif; font-size: 0.78em; font-weight: 700;
-  letter-spacing: 1.5px; text-transform: uppercase; color: var(--bc-accent);
-  margin-bottom: 10px; display: block;
+  font-size: 0.72em; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--bc-text-dim); margin-bottom: 12px; display: block;
+  border-bottom: 1px solid var(--bc-border); padding-bottom: 8px;
 }
 
 #bc-input textarea {
-  background: var(--bc-bg-0) !important; border: 1px solid var(--bc-border) !important;
-  border-radius: 12px !important; color: var(--bc-text) !important; font-size: 1.05em !important;
+  background: var(--bc-surface) !important; border: 1px solid var(--bc-border-strong) !important;
+  border-radius: 6px !important; color: var(--bc-text) !important; font-size: 1em !important;
+  line-height: 1.5;
 }
 #bc-input textarea:focus {
   border-color: var(--bc-accent) !important;
-  box-shadow: 0 0 0 3px rgba(6,182,212,0.15) !important;
+  box-shadow: 0 0 0 3px rgba(23,92,211,0.12) !important;
 }
 
 #bc-run-btn {
-  background: linear-gradient(90deg, var(--bc-accent), var(--bc-accent-2)) !important;
-  border: none !important; color: white !important; font-weight: 600 !important;
-  border-radius: 10px !important; box-shadow: 0 4px 18px rgba(6,182,212,0.30);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  background: var(--bc-accent) !important;
+  border: 1px solid var(--bc-accent-dark) !important; color: white !important;
+  font-weight: 600 !important; border-radius: 6px !important; box-shadow: none !important;
+  transition: background 0.12s ease;
 }
-#bc-run-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(139,92,246,0.40); }
+#bc-run-btn:hover { background: var(--bc-accent-dark) !important; }
+
+/* radio "Model" selector - render as a segmented control, not stacked bubbles */
+.gradio-container fieldset { border: none !important; }
 
 /* ---- results ---- */
-.bc-results { display: flex; gap: 14px; flex-wrap: wrap; align-items: stretch; }
+.bc-results { display: flex; gap: 16px; flex-wrap: wrap; align-items: stretch; }
 .bc-panel {
   flex: 1 1 320px; min-width: 300px;
-  background: linear-gradient(180deg, var(--bc-bg-1), var(--bc-bg-2));
-  border: 1px solid var(--bc-border); border-radius: 16px; padding: 16px 18px;
+  background: var(--bc-surface); border: 1px solid var(--bc-border); border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(16,24,40,0.04);
 }
 .bc-panel-head {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: 10px; margin-bottom: 12px; padding-bottom: 10px;
-  border-bottom: 1px solid var(--bc-border);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--bc-border);
+  background: #fafbfc; border-radius: 8px 8px 0 0;
 }
-.bc-panel-title {
-  font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.02em;
-  color: var(--bc-text);
+.bc-panel-title { font-weight: 600; font-size: 0.95em; color: var(--bc-text); }
+.bc-panel-meta {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.74em; color: var(--bc-text-dim);
+  background: var(--bc-bg); border: 1px solid var(--bc-border); border-radius: 4px;
+  padding: 2px 7px;
 }
-.bc-panel-meta { font-size: 0.76em; color: var(--bc-text-dim); font-family: 'Space Grotesk', sans-serif; }
+.bc-panel-body { padding: 16px 18px 18px 18px; }
 
-.bc-entity-chip {
-  display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px;
-  margin: 3px 5px 3px 0; border-radius: 999px; font-size: 0.86em;
-  font-weight: 500; white-space: nowrap;
+/* entity list rendered like an annotated report, not a tag cloud */
+.bc-entity-table { width: 100%; border-collapse: collapse; font-size: 0.88em; }
+.bc-entity-table tr { border-bottom: 1px solid var(--bc-border); }
+.bc-entity-table tr:last-child { border-bottom: none; }
+.bc-entity-table td { padding: 7px 4px; vertical-align: top; }
+.bc-entity-swatch {
+  width: 9px; height: 9px; border-radius: 2px; display: inline-block; margin-right: 8px;
 }
-.bc-entity-chip .bc-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
-.bc-entity-type {
-  font-family: 'Space Grotesk', sans-serif; font-size: 0.73em; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85;
+.bc-entity-type-cell {
+  width: 34%; font-weight: 500; color: var(--bc-text-dim); font-size: 0.92em;
+  white-space: nowrap;
 }
-.bc-empty-note { color: var(--bc-text-dim); font-style: italic; font-size: 0.9em; }
+.bc-entity-text-cell { color: var(--bc-text); }
+.bc-empty-note { color: var(--bc-text-dim); font-style: italic; font-size: 0.9em; padding: 4px 0; }
 
+/* severity: a status banner with a left rule, like a clinical alert */
+.bc-severity-box {
+  border-left: 3px solid; border-radius: 4px; padding: 12px 16px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+}
 .bc-severity-label {
-  font-family: 'Space Grotesk', sans-serif; font-size: 1.45em; font-weight: 700;
-  display: flex; align-items: center; gap: 9px; margin-top: 4px;
+  font-weight: 700; font-size: 0.95em; letter-spacing: 0.04em;
 }
+.bc-severity-conf {
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.85em; font-weight: 500;
+}
+
 .bc-confidence-track {
-  background: rgba(255,255,255,0.08); border-radius: 999px; height: 8px;
-  width: 100%; margin: 11px 0 4px 0; overflow: hidden;
+  background: var(--bc-border); border-radius: 3px; height: 5px;
+  width: 100%; margin: 12px 0 2px 0; overflow: hidden;
 }
-.bc-confidence-fill { height: 100%; border-radius: 999px; }
-.bc-confidence-text {
-  font-size: 0.8em; color: var(--bc-text-dim); font-family: 'Space Grotesk', sans-serif;
-  letter-spacing: 0.5px;
+.bc-confidence-fill { height: 100%; border-radius: 3px; }
+
+.bc-prob-table { width: 100%; margin-top: 12px; font-size: 0.82em; border-collapse: collapse; }
+.bc-prob-table td { padding: 3px 0; }
+.bc-prob-label { color: var(--bc-text-dim); width: 34%; white-space: nowrap; }
+.bc-prob-track { background: var(--bc-bg); border-radius: 3px; height: 5px; overflow: hidden; }
+.bc-prob-fill { height: 100%; border-radius: 3px; }
+.bc-prob-pct {
+  font-family: 'IBM Plex Mono', monospace; width: 42px; text-align: right;
+  color: var(--bc-text-dim); padding-left: 8px; white-space: nowrap;
 }
-.bc-prob-row { display: flex; align-items: center; gap: 8px; margin-top: 5px; font-size: 0.8em; }
-.bc-prob-label { width: 118px; color: var(--bc-text-dim); flex-shrink: 0; }
-.bc-prob-track { flex: 1; background: rgba(255,255,255,0.06); border-radius: 999px; height: 6px; overflow: hidden; }
-.bc-prob-fill { height: 100%; border-radius: 999px; opacity: 0.85; }
-.bc-prob-pct { width: 40px; text-align: right; color: var(--bc-text-dim); flex-shrink: 0; }
 
 .bc-review-banner {
-  margin-top: 12px; background: rgba(255,165,61,0.12);
-  border: 1px solid rgba(255,165,61,0.4); color: #ffcb8a;
-  padding: 9px 13px; border-radius: 10px; font-size: 0.86em;
+  margin-top: 12px; background: #fffaeb; border: 1px solid #fec84b; border-left: 3px solid #b54708;
+  color: #93370d; padding: 8px 12px; border-radius: 4px; font-size: 0.84em; font-weight: 500;
 }
 .bc-subhead {
-  font-family: 'Space Grotesk', sans-serif; font-size: 0.72em; font-weight: 700;
-  letter-spacing: 1.2px; text-transform: uppercase; color: var(--bc-accent);
-  margin: 14px 0 7px 0; display: block;
+  font-size: 0.7em; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--bc-text-dim); margin: 16px 0 8px 0; display: block;
 }
+.bc-subhead:first-child { margin-top: 0; }
 .bc-agree {
-  margin-bottom: 12px; padding: 10px 14px; border-radius: 10px;
-  font-size: 0.88em; border: 1px solid var(--bc-border);
+  margin-bottom: 14px; padding: 10px 14px; border-radius: 4px; border-left: 3px solid;
+  font-size: 0.88em;
 }
 .bc-disclaimer {
-  text-align: center; color: var(--bc-text-dim); font-size: 0.85em; padding: 10px 0 4px 0;
+  text-align: center; color: var(--bc-text-dim); font-size: 0.82em; padding: 16px 0 4px 0;
+  border-top: 1px solid var(--bc-border); margin-top: 8px;
 }
-.bc-hint { color: var(--bc-text-dim); font-size: 0.84em; margin-top: 6px; }
+.bc-hint { color: var(--bc-text-dim); font-size: 0.82em; margin-top: 8px; }
 """
 
 
 def _render_entities(entities):
     if not entities:
         return "<div class='bc-empty-note'>No medical entities detected.</div>"
-    chips = []
+    rows = []
     for e in entities:
-        color = ENTITY_COLORS.get(e["type"], "#93a1bf")
-        chips.append(
-            f"<span class='bc-entity-chip' style='background:{color}1f;"
-            f"border:1px solid {color}55;color:{color};'>"
-            f"<span class='bc-dot' style='background:{color};'></span>"
-            f"<span class='bc-entity-type'>{e['type']}</span>{e['text']}</span>"
+        color = ENTITY_COLORS.get(e["type"], "#667085")
+        rows.append(
+            "<tr>"
+            f"<td class='bc-entity-type-cell'>"
+            f"<span class='bc-entity-swatch' style='background:{color};'></span>{e['type']}</td>"
+            f"<td class='bc-entity-text-cell'>{e['text']}</td>"
+            "</tr>"
         )
-    return "<div>" + "".join(chips) + "</div>"
+    return f"<table class='bc-entity-table'>{''.join(rows)}</table>"
 
 
 def _render_severity(severity, confidence, probs, needs_review):
-    style = SEVERITY_STYLE.get(severity, {"color": "#93a1bf", "glow": "transparent", "icon": "•"})
-    color = style["color"]
-
-    prob_rows = "".join(
-        f"<div class='bc-prob-row'>"
-        f"<span class='bc-prob-label'>{SEVERITY_STYLE.get(n, {}).get('icon', '')} {n}</span>"
-        f"<span class='bc-prob-track'><span class='bc-prob-fill' "
-        f"style='width:{p*100:.1f}%;background:{SEVERITY_STYLE.get(n, {}).get('color', color)};'>"
-        f"</span></span><span class='bc-prob-pct'>{p:.0%}</span></div>"
-        for n, p in sorted(probs.items(), key=lambda kv: -kv[1])
+    style = SEVERITY_STYLE.get(
+        severity, {"color": "#667085", "bg": "#f7f8fa", "border": "#cdd2db", "label": severity or "-"}
     )
 
+    own_color = style["color"]
+    prob_row_html = []
+    for n, p in sorted(probs.items(), key=lambda kv: -kv[1]):
+        bar_color = SEVERITY_STYLE.get(n, {}).get("color", own_color)
+        prob_row_html.append(
+            "<tr>"
+            f"<td class='bc-prob-label'>{n}</td>"
+            f"<td><div class='bc-prob-track'><div class='bc-prob-fill' "
+            f"style='width:{p*100:.1f}%;background:{bar_color};'></div></div></td>"
+            f"<td class='bc-prob-pct'>{p:.0%}</td>"
+            "</tr>"
+        )
+    prob_rows = "".join(prob_row_html)
+
     html = (
-        f"<div class='bc-severity-label' style='color:{color};'>"
-        f"<span>{style['icon']}</span><span>{severity}</span></div>"
+        f"<div class='bc-severity-box' style='background:{style['bg']};"
+        f"border-left-color:{own_color};'>"
+        f"<span class='bc-severity-label' style='color:{own_color};'>{style['label']}</span>"
+        f"<span class='bc-severity-conf' style='color:{own_color};'>{confidence:.1%} confidence</span>"
+        f"</div>"
         f"<div class='bc-confidence-track'><div class='bc-confidence-fill' "
-        f"style='width:{confidence*100:.1f}%;background:linear-gradient(90deg,{color},{color}aa);'>"
-        f"</div></div>"
-        f"<div class='bc-confidence-text'>CALIBRATED CONFIDENCE &nbsp;{confidence:.1%}</div>"
-        f"<div style='margin-top:12px;'>{prob_rows}</div>"
+        f"style='width:{confidence*100:.1f}%;background:{own_color};'></div></div>"
+        f"<table class='bc-prob-table'>{prob_rows}</table>"
     )
     if needs_review:
         html += (
-            "<div class='bc-review-banner'>🔍 <b>Low confidence — "
-            "recommend human review</b></div>"
+            "<div class='bc-review-banner'>Low confidence — "
+            "recommended for human review</div>"
         )
     return html
 
@@ -237,7 +291,7 @@ def _render_panel(result):
         return (
             f"<div class='bc-panel'><div class='bc-panel-head'>"
             f"<span class='bc-panel-title'>{result.get('arch_label', '')}</span></div>"
-            f"<div style='color:#ff9eb0;'>⚠️ {result['error']}</div></div>"
+            f"<div class='bc-panel-body' style='color:#b42318;'>{result['error']}</div></div>"
         )
 
     params = result["n_params"]
@@ -248,11 +302,12 @@ def _render_panel(result):
         f"<span class='bc-panel-title'>{result['arch_label']}</span>"
         f"<span class='bc-panel-meta'>{params_str}</span>"
         f"</div>"
+        f"<div class='bc-panel-body'>"
         f"<span class='bc-subhead'>Extracted entities</span>"
         f"{_render_entities(result['entities'])}"
         f"<span class='bc-subhead'>Severity triage</span>"
         f"{_render_severity(result['severity'], result['confidence'], result['severity_probs'], result['needs_review'])}"
-        f"</div>"
+        f"</div></div>"
     )
 
 
@@ -263,16 +318,16 @@ def _render_agreement(results):
         return ""
     if sevs[0] == sevs[1]:
         return (
-            f"<div class='bc-agree' style='background:rgba(61,220,151,0.10);"
-            f"border-color:rgba(61,220,151,0.35);color:#9af0c8;'>"
-            f"✓ <b>Both models agree:</b> {sevs[0]}</div>"
+            "<div class='bc-agree' style='background:#ecfdf3;"
+            "border-left-color:#067647;color:#067647;'>"
+            f"<b>Both models agree:</b> {sevs[0]}</div>"
         )
     return (
-        f"<div class='bc-agree' style='background:rgba(255,165,61,0.10);"
-        f"border-color:rgba(255,165,61,0.35);color:#ffcb8a;'>"
-        f"⚖️ <b>Models disagree:</b> {results[0]['arch_label']} says "
-        f"<b>{sevs[0]}</b>, {results[1]['arch_label']} says <b>{sevs[1]}</b> — "
-        f"a case worth human review.</div>"
+        "<div class='bc-agree' style='background:#fffaeb;"
+        "border-left-color:#b54708;color:#93370d;'>"
+        f"<b>Models disagree:</b> {results[0]['arch_label']} indicates "
+        f"<b>{sevs[0]}</b>; {results[1]['arch_label']} indicates <b>{sevs[1]}</b> — "
+        "recommended for human review.</div>"
     )
 
 
@@ -295,9 +350,12 @@ def build_interface(registry, default_mode):
 
     with gr.Blocks(title="BanglaCare") as demo:
         gr.HTML(
-            "<div id='bc-header'><h1>⚡ BanglaCare</h1>"
-            "<p>Entity-aware Bangla health query triage — medical NER · "
-            "4-class severity · calibrated confidence</p></div>"
+            "<div id='bc-header'>"
+            "<div class='bc-brand'><span class='bc-mark'></span>"
+            "<h1>BanglaCare</h1>"
+            "<span class='bc-tagline'>Health Query Triage System</span></div>"
+            "<span class='bc-badge'>NER · SEVERITY · CALIBRATED CONFIDENCE</span>"
+            "</div>"
         )
 
         with gr.Row(equal_height=False):
@@ -315,10 +373,11 @@ def build_interface(registry, default_mode):
                 )
                 gr.HTML(
                     "<div class='bc-hint'>Models load on first use — "
-                    "BanglaBERT takes ~20s, the BiLSTM ~2 min (it loads 8GB of "
-                    "FastText vectors). Later queries are instant.</div>"
+                    "BanglaBERT takes about 20 seconds; the BiLSTM takes about "
+                    "2 minutes (it loads 8GB of FastText vectors). Later "
+                    "queries are near-instant.</div>"
                 )
-                run_btn = gr.Button("⚡ Analyze", elem_id="bc-run-btn", size="lg")
+                run_btn = gr.Button("Analyze", elem_id="bc-run-btn", size="lg")
                 gr.Examples(examples=EXAMPLES, inputs=text_input, label="Try an example")
 
             with gr.Column(scale=6, elem_classes=["bc-card"]):
@@ -328,7 +387,7 @@ def build_interface(registry, default_mode):
                           "Analyze.</div>"
                 )
 
-        gr.HTML(f"<div class='bc-disclaimer'>🛈 {DISCLAIMER}</div>")
+        gr.HTML(f"<div class='bc-disclaimer'>{DISCLAIMER}</div>")
 
         run_btn.click(run, inputs=[text_input, mode], outputs=results_out)
         text_input.submit(run, inputs=[text_input, mode], outputs=results_out)
@@ -390,7 +449,7 @@ def main():
         share=args.share,
         server_port=args.port,
         theme=gr.themes.Base(
-            primary_hue="cyan", secondary_hue="purple", neutral_hue="slate",
+            primary_hue="blue", secondary_hue="slate", neutral_hue="slate",
             font=[gr.themes.GoogleFont("Inter"), "ui-sans-serif", "sans-serif"],
         ),
         css=CUSTOM_CSS,
