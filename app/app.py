@@ -68,16 +68,26 @@ CUSTOM_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --bc-bg: #eef6f5;
-  --bc-bg-2: #eaf2fb;
-  --bc-surface: #ffffff;
-  --bc-surface-tint: #f6fbfa;
-  --bc-border: #dbe8e5;
-  --bc-border-strong: #bcd6d0;
-  --bc-text: #16302c;
-  --bc-text-dim: #5b7d76;
-  --bc-accent: #0f766e;
-  --bc-accent-dark: #0b5850;
+  /* Warm parchment ground - not stark white, not a flat pastel tint. */
+  --bc-bg: #f8f5ee;
+  --bc-bg-2: #f1ebdc;
+  --bc-surface: #fffefb;
+  --bc-surface-tint: #faf7ef;
+  --bc-border: #e7e0cb;
+  --bc-border-strong: #d6cba3;
+  --bc-text: #23291f;
+  --bc-text-dim: #736b52;
+
+  /* Deep emerald as the working accent (buttons, focus rings, labels)... */
+  --bc-accent: #0d5c4f;
+  --bc-accent-dark: #073d34;
+  /* ...and a muted brass/gold as the second, used sparingly for distinction. */
+  --bc-gold: #b08d3f;
+  --bc-gold-soft: #e2d6ae;
+
+  /* The masthead is its own dark surface, not a tint of the page. */
+  --bc-ink: #0e2420;
+  --bc-ink-2: #163b32;
 }
 
 .gradio-container {
@@ -87,47 +97,56 @@ CUSTOM_CSS = """
   color: var(--bc-text) !important;
 }
 
-/* ---- masthead: a letterhead, not a hero banner ---- */
+/* ---- masthead: a dark letterhead card, not a tint of the page ---- */
 #bc-header {
-  border-bottom: 1px solid var(--bc-border-strong);
-  padding: 18px 4px 16px 4px;
-  margin-bottom: 4px;
+  background: linear-gradient(135deg, var(--bc-ink) 0%, var(--bc-ink-2) 100%);
+  border-radius: 10px;
+  padding: 20px 26px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 24px rgba(14,36,32,0.22);
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
+}
+#bc-header::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: linear-gradient(90deg, var(--bc-gold) 0%, rgba(176,141,63,0) 65%);
 }
 #bc-header .bc-brand {
-  display: flex; align-items: baseline; gap: 10px;
+  display: flex; align-items: baseline; gap: 11px;
 }
 #bc-header .bc-mark {
-  display: inline-block; width: 9px; height: 9px; border-radius: 2px;
-  background: var(--bc-accent); position: relative; top: -1px;
+  display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--bc-gold); box-shadow: 0 0 0 3px rgba(176,141,63,0.22);
+  position: relative; top: -1px;
 }
 #bc-header h1 {
   font-size: 1.5em !important; font-weight: 700 !important; letter-spacing: -0.01em;
-  color: var(--bc-text) !important; margin: 0 !important;
+  color: #f7f4ea !important; margin: 0 !important;
 }
 #bc-header .bc-tagline {
-  color: var(--bc-text-dim) !important; font-size: 0.88em; margin: 0 !important;
+  color: #a9c3ba !important; font-size: 0.88em; margin: 0 !important;
 }
 #bc-header .bc-badge {
-  font-family: 'IBM Plex Mono', monospace; font-size: 0.72em; color: var(--bc-text-dim);
-  border: 1px solid var(--bc-border-strong); border-radius: 4px; padding: 3px 8px;
-  letter-spacing: 0.03em;
+  font-family: 'IBM Plex Mono', monospace; font-size: 0.7em; color: var(--bc-gold-soft);
+  border: 1px solid rgba(176,141,63,0.4); border-radius: 4px; padding: 3px 9px;
+  letter-spacing: 0.04em; background: rgba(176,141,63,0.08);
 }
 
 .bc-card {
   background: var(--bc-surface) !important;
   border: 1px solid var(--bc-border) !important; border-radius: 8px !important;
-  padding: 20px !important; box-shadow: 0 1px 2px rgba(16,24,40,0.04);
+  padding: 20px !important; box-shadow: 0 1px 2px rgba(80,65,20,0.06);
 }
 
 .bc-section-label {
   font-size: 0.72em; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--bc-text-dim); margin-bottom: 12px; display: block;
-  border-bottom: 1px solid var(--bc-border); padding-bottom: 8px;
+  color: var(--bc-accent); margin-bottom: 12px; display: block;
+  border-bottom: 1px solid var(--bc-gold-soft); padding-bottom: 8px;
 }
 
 #bc-input textarea {
@@ -156,7 +175,7 @@ CUSTOM_CSS = """
 .bc-panel {
   flex: 1 1 320px; min-width: 300px;
   background: var(--bc-surface); border: 1px solid var(--bc-border); border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(16,24,40,0.04);
+  box-shadow: 0 1px 2px rgba(80,65,20,0.06);
 }
 .bc-panel-head {
   display: flex; align-items: center; justify-content: space-between;
@@ -240,7 +259,7 @@ def _render_entities(entities):
         return "<div class='bc-empty-note'>No medical entities detected.</div>"
     rows = []
     for e in entities:
-        color = ENTITY_COLORS.get(e["type"], "#667085")
+        color = ENTITY_COLORS.get(e["type"], "#736b52")
         rows.append(
             "<tr>"
             f"<td class='bc-entity-type-cell'>"
@@ -253,7 +272,7 @@ def _render_entities(entities):
 
 def _render_severity(severity, confidence, probs, needs_review):
     style = SEVERITY_STYLE.get(
-        severity, {"color": "#667085", "bg": "#f7f8fa", "border": "#cdd2db", "label": severity or "-"}
+        severity, {"color": "#736b52", "bg": "#f8f5ee", "border": "#d6cba3", "label": severity or "-"}
     )
 
     own_color = style["color"]
