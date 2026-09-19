@@ -68,18 +68,21 @@ CUSTOM_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --bc-bg: #f7f8fa;
+  --bc-bg: #eef6f5;
+  --bc-bg-2: #eaf2fb;
   --bc-surface: #ffffff;
-  --bc-border: #e3e6eb;
-  --bc-border-strong: #cdd2db;
-  --bc-text: #1a2233;
-  --bc-text-dim: #667085;
-  --bc-accent: #175cd3;
-  --bc-accent-dark: #10437a;
+  --bc-surface-tint: #f6fbfa;
+  --bc-border: #dbe8e5;
+  --bc-border-strong: #bcd6d0;
+  --bc-text: #16302c;
+  --bc-text-dim: #5b7d76;
+  --bc-accent: #0f766e;
+  --bc-accent-dark: #0b5850;
 }
 
 .gradio-container {
-  background: var(--bc-bg) !important;
+  background: linear-gradient(165deg, var(--bc-bg) 0%, var(--bc-bg-2) 100%) !important;
+  background-attachment: fixed !important;
   font-family: 'Inter', ui-sans-serif, -apple-system, sans-serif !important;
   color: var(--bc-text) !important;
 }
@@ -134,7 +137,7 @@ CUSTOM_CSS = """
 }
 #bc-input textarea:focus {
   border-color: var(--bc-accent) !important;
-  box-shadow: 0 0 0 3px rgba(23,92,211,0.12) !important;
+  box-shadow: 0 0 0 3px rgba(15,118,110,0.14) !important;
 }
 
 #bc-run-btn {
@@ -158,7 +161,7 @@ CUSTOM_CSS = """
 .bc-panel-head {
   display: flex; align-items: center; justify-content: space-between;
   gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--bc-border);
-  background: #fafbfc; border-radius: 8px 8px 0 0;
+  background: var(--bc-surface-tint); border-radius: 8px 8px 0 0;
 }
 .bc-panel-title { font-weight: 600; font-size: 0.95em; color: var(--bc-text); }
 .bc-panel-meta {
